@@ -1,0 +1,445 @@
+/*
+Class Input Masuk di dalamnya
+1. Textbox
+2. Number
+3. Date
+4. Option Button / Radio Button
+5. Checkbox
+
+	Standart Untuk Semua Component Input, CheckBox, Caption dll
+*/
+INPUT,
+.input-caption,
+.input-button,
+.input-lcaption,
+.input-check[type="radio"] + div,
+.input-check[type="checkbox"] + div,
+.input-label,
+.input-file-label,
+select,
+.txtRequired {
+	display:inline-block ;
+	FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px;
+	color: var(--fontColor) ;
+	vertical-align:middle;
+	box-sizing: border-box; 
+	height: 20px;
+	min-height:20px ;
+	max-height:20px ;
+	white-space: nowrap;
+	line-height:20px;	
+}
+
+.div-input-container {
+	position:relative;
+	width:auto;
+	display:inline-block ;
+	FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px;
+	vertical-align:middle;
+	box-sizing: border-box; 
+	height: auto;
+	white-space: nowrap;
+	padding-right:4px;
+}
+
+select,
+INPUT {
+	border:1px solid var(--inpBorderColor);
+	background:var(--inputBack);
+	outline:none;
+	padding:1px 3px ;
+	border-radius:2px ;
+}
+
+INPUT:focus {
+	background:var(--inpFocusBack);
+	border:2px solid var(--inpFocusBorder);
+	outline:none;
+	border-radius: 4px;
+	padding:0px 2px ;
+}
+
+// Standart Disable dan Readonly
+INPUT:disabled,
+INPUT.txtReadOnly,
+INPUT:focus[readonly] {
+	cursor:default;
+	outline:none;
+	border-radius:0px;
+	padding:1px 3px ;
+	background:var(--inpDisabledBack);
+	border-color:var(--inpDisabledBorder);
+	user-select:none; 
+}
+
+INPUT.txtReadOnly,
+INPUT:focus[readonly] {
+	//pointer-events: none;
+}
+
+input:disabled {
+	pointer-events: auto;
+	cursor: not-allowed ;
+}
+
+// untuk Input type ReadOnly
+input.txtReadOnly,
+input.txtReadOnly:focus {
+	background:var(--inpDisabledBack);
+	border:1px solid var(--inpDisabledBorder);
+}
+
+/*
+CSS Untuk Button
+*/
+.Button,
+.Button:active,
+.Button:focus,
+.Button:disabled {
+	white-space: nowrap;
+	border:1px solid var(--ButtonBorder);
+	text-align:center;
+	border-radius:4px;
+	font-family: Verdana,Helvetica;
+	padding:0px 10px 0px 10px;
+	font-size:12px;
+	cursor:default;
+	color: var(--ButtonFontColor) ;
+	height: 24px;
+	min-height:24px ;
+	max-height:24px ;
+	box-sizing: border-box; 
+	background: linear-gradient(var(--ButtonColor1), var(--ButtonColor2));
+}
+
+.Button:hover:enabled,
+.Button:focus,
+.Button:active:enabled {
+	cursor: pointer ;
+	background: linear-gradient(var(--ButtonHoverColor1), var(--ButtonHoverColor2));
+	border:2px solid var(--ButtonHoverBorder) ;
+	padding:0px 9px 0px 9px;
+}
+
+.Button:active:enabled {
+	background: linear-gradient(var(--ButtonClickColor1), var(--ButtonClickColor2));
+}
+
+.Button:disabled,
+.Button:hover:disabled {
+	background:var(--inpDisabledBack);
+	border-color:var(--inpDisabledBorder);
+	cursor: not-allowed ;
+}
+
+/* Class Input Caption */
+.input-caption {
+	padding:0px 4px ;
+}
+
+.input-label {
+	padding:0px 4px 0px 0px ;
+}
+
+/* Class Input Type File */
+.input-file {
+	line-height:16px ;
+}
+
+.input-file:focus {
+	border-radius: 2px;
+}
+
+.input-file::file-selector-button {
+	cursor: pointer ;
+	white-space: nowrap;
+	border:1px solid var(--ButtonBorder);
+	text-align:center;
+	border-radius: 2px 0px 0px 2px;
+	font-family: Verdana,Helvetica;
+	color: var(--ButtonFontColor) ;
+	height: 20px;
+	min-height:20px ;
+	max-height:20px ;
+	box-sizing: border-box; 
+	background: linear-gradient(var(--ButtonColor1), var(--ButtonColor2));
+	margin-left: -6px ;
+	margin-top:-4px;
+	line-height:16px ;
+}
+
+.input-file:disabled::file-selector-button
+{
+	background:var(--inpDisabledBack);
+	border-color:var(--inpDisabledBorder);
+	cursor: not-allowed ;
+}
+
+/* Class Untuk Button Sebelah Kanan Field ( Untuk ButtonField dan Date) */
+.input-button {
+	border:1px solid var(--inpBorderColor);
+	border-left:0px;
+	background:var(--inputBack); 
+	border-radius:0px 2px 2px 0px ;
+	border-width:1px;
+	cursor:default;
+	user-select:none;
+	margin-left:-4px;
+	padding:1px 1px ;
+}
+
+.input-button:hover {
+	background:var(--inpDisabledBack) ;
+}
+
+INPUT:focus + .input-button,
+INPUT:focus.input-error + .input-button {
+	background:var(--inpFocusBack);
+	border:2px solid var(--inpFocusBorder);
+	border-radius:0px 4px 4px 0px ;
+	border-left:0px;
+	margin-left:-3px;
+	padding:0px ;
+}
+
+input.input-error + .input-button {
+  border:1px solid #e32;
+	border-left:0px;
+	margin-left:-4px;
+}
+
+INPUT[disabled] + .input-button,
+input.txtReadOnly + .input-button,
+input.txtReadOnly:focus + .input-button {
+	border-color: var(--inpDisabledBorder);
+	background-color: var(--inpDisabledBack);
+	border-width:1px;
+	cursor:default;
+	user-select:none;
+	margin-right:2px;
+	margin-left:-4px;
+	padding:1px 1px ;
+	pointer-events: none;
+}
+
+/* CLASS INPUT */
+.txtRequired {
+	color: #e32;
+	font-size: 14px ;
+	padding:2px 0px 0px 2px ;
+	margin-left:-1px ;
+	margin-right:-1px ;
+}
+
+/* Option Button */
+.input-check[type="radio"] {
+	opacity: 0; 
+	position: absolute;
+	cursor: pointer ;
+}
+
+.input-error {
+	border:1px solid #e32;
+}
+
+.input-check[type="radio"] + div {
+	height: 18px;
+	width: 18px;
+	max-height: 18px;
+	max-width: 18px;
+	min-height: 18px;
+	min-width: 18px;
+	border-radius: 50%;
+	margin:1px 0px 1px 0px ;
+	border: 1px solid var(--inpBorderColor);
+	background:var(--inputBack); 
+}
+
+/*
+Definisi Untuk Titik Di tengah Option Button menggunakan before
+*/
+.input-check[type="radio"] + div::before {
+		content: "";
+		border-radius: 50%;
+		width: 10px;
+		height: 10px;
+		display: inline-block;
+		margin: 3px;
+		background-color: var(--fontColor);
+		opacity: 0;
+}
+
+/*
+Pada saat di click kita munculkan atau tidak di buat transparent
+*/
+.input-check[type="radio"]:checked + div::before {
+  opacity: 1;
+}
+
+
+// Disable
+.input-check[type="radio"]:disabled + div {
+	border-color: var(--inpDisabledBorder);
+	background-color: var(--inpDisabledBack);
+}
+
+.input-check[type="radio"]:disabled {
+	cursor: not-allowed ;
+}
+
+/*
+Waktu Posisi Cursor di atas Radio Button atur sekalian dengan before nya
+*/
+.input-check[type="radio"]:hover:enabled + div {
+	border: 2px solid var(--inpBorderColor);
+}
+
+/*
+Waktu Posisi Focus Di Radio Button Atur Sekalian dengan before nya
+*/
+.input-check[type="radio"]:focus + div {
+	background:var(--inpFocusBack);
+	border:2px solid var(--inpFocusBorder);
+}
+
+/*
+Before Untuk Kedua Posisi Hover dan Focus sama
+*/
+.input-check[type="radio"]:hover:enabled + div::before,
+.input-check[type="radio"]:focus + div::before {
+	margin: 2px;
+}
+
+
+/*
+Style Check Box
+*/
+.input-check[type="checkbox"] {
+	opacity: 0; 
+	position: absolute;
+	cursor: pointer ;
+}
+
+.input-check[type="checkbox"] + div {
+	height: 18px;
+	width: 18px;
+	max-height: 18px;
+	max-width: 18px;
+	min-height: 18px;
+	min-width: 18px;
+	line-height:18px;
+	margin:1px 0px 1px 0px ;
+	border: 1px solid var(--inpBorderColor);
+	background:var(--inputBack); 
+	border-radius:2px ;
+}
+.input-check[type="checkbox"] + div::before {
+	display:inline-block ;
+	padding: 2px 2px 2px 1px;
+	content: "\2714";
+	height:16px;
+	width:16px;
+	font-size:15px;
+	line-height:12px;
+	color: var(--fontColor) ;
+	opacity: 0;
+	position: relative;
+}
+
+/* Checked */
+.input-check[type="checkbox"]:checked + div::before {
+	opacity: 1;
+}
+
+.input-check[type="checkbox"]:disabled {
+	cursor: not-allowed ;
+}
+
+/* Disabled */
+.input-check[type="checkbox"]:disabled + div {
+	border-color: var(--inpDisabledBorder);
+	background-color: var(--inpDisabledBack);
+}
+
+/* Hover */
+.input-check[type="checkbox"]:hover:enabled + div {
+	border: 2px solid var(--inpBorderColor);
+}
+
+/* Focus */
+.input-check[type="checkbox"]:focus + div {
+	background:var(--inpFocusBack);
+	border:2px solid var(--inpFocusBorder);
+}
+
+/* Hover Dan Focus Sama untuk ::before */
+.input-check[type="checkbox"]:hover:enabled + div::before,
+.input-check[type="checkbox"]:focus + div::before {
+	padding: 1px 1px 1px 0px ;
+}
+
+/*
+Tooltip
+*/
+:root {
+	--tooltip-after-left : 10px ;
+	--tooltip-after-top : -8px ;
+	--tooltip-after-rotate : -45deg ;
+}
+.error-tooltip {
+  background-color: var(--bodyBackColor);
+	border:1px solid var(--inpDisabledBorder) ;
+  padding: 15px 15px;
+  border-radius: 5px;
+  position: absolute;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	padding-left: 45px;
+	white-space: nowrap;
+	user-select:none;
+	opacity:1;
+	animation: inputTipFrame 1.2s ;
+	pointer-events: none;
+	color: var(--fontColor) ;
+}
+.error-tooltip::after {
+	content: "";
+	width: 12;
+	height: 12;
+	background-color: var(--bodyBackColor);
+	border-style: solid;
+	border-width: 1px 1px 0px 0px;
+	border-color: var(--inpDisabledBorder) var(--inpDisabledBorder) transparent transparent;
+	position: absolute;
+	border-radius: 2px ;
+	top: var(--tooltip-after-top) ;
+	left: var(--tooltip-after-left);
+	transform: rotate(var(--tooltip-after-rotate));
+	z-Index:1;
+	pointer-events: none;
+}
+.error-tooltip::before {
+	position: absolute;
+	content: "!";
+	top: 20%;
+	left: 10px;
+	border: 1px solid #f90404;
+	font-size: 15px;
+	background-color: #f6d7d7;
+	color: #f90404;
+	padding: 2px 8px;
+	border-radius: 4px;
+	pointer-events: none;	
+}
+
+@keyframes inputTipFrame {
+	0% { opacity: 0; } 100% { opacity: 1; } ;
+}
+
+/*
+Select Bar
+*/
+select option {
+  background-color: var(--bodyBackColor) ;
+	border:1px solid var(--mainPanelBorder) ;
+	color: var(--fontColor) ;
+}

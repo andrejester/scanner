@@ -1,0 +1,3 @@
+/*
+Class Di ganti ke ajax. cal.js
+*/

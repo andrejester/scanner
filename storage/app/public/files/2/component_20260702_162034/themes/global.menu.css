@@ -1,0 +1,260 @@
+/*
+Class Menu Pulldown
+*/
+
+/*
+Menu Horizontal
+*/
+.menu2_hz,
+.menu2_hz_over {
+	margin-top:1px;
+  margin-bottom:1px;
+	display: inline-block;
+	font-family:Arial, Helvetica, sans-serif;
+	height:26px ;
+	line-height:26px ;
+	padding-left:10px;
+	padding-right:10px;
+	cursor:default;
+	white-space: nowrap;
+	user-select:none;
+}
+
+.menu2_hz_over {	
+	background:var(--hzOverBack);
+	border-radius:4px;
+	color:var(--hzOverFont);
+}
+
+.menu2_hrz_main {
+	margin-left:0px;
+	top:0px;
+	left:0px;
+	background:var(--hzMainBack);
+	width:100%;
+	height:28px;
+}
+
+/*
+Menu Vertical 
+*/
+.menu2_vert_main {
+	animation: menu-slide 1s ease-in-out;
+	background-color:var(--vrMainBack);
+	opacity:0.93;
+	border:1px solid var(--vrMainBorder);
+	border-radius:4px;
+	position:absolute;
+	display:none;
+	width:auto;
+	height:auto;
+	overflow:auto;
+	overflow-x:hidden;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+	padding:0px;
+}
+
+// Background menu sebelah kiri ( di bawah Icon Kiri )
+.menu2-left {
+  width: 30px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+	height:100%;
+	background: linear-gradient(to right, var(--vrItemFirst1), var(--vrItemFirst2));
+  z-index: 1;
+}
+
+/*
+Default Menu Vertical
+*/
+.menu2_vert_item,
+.menu2_vert_item > div:nth-child(1),		// Icon Kiri
+.menu2_vert_item > div:nth-child(2),		// Menu Title
+.menu2_vert_item > div:nth-child(3) {		// Menu Icon Kanan
+	height:26px ;
+	vertical-align: middle;
+	line-height:26px ;
+	font-family:Arial, Helvetica, sans-serif;
+	cursor:default;
+	z-index:2;
+	white-space: nowrap;
+	user-select:none;
+}
+
+.menu2_vert_item {
+	position: relative;
+	display: flex;
+  align-items: center;
+	border:1px solid transparent;
+	margin:2px 2px 2px 1px ;
+}
+
+.menu2_vert_item > div:nth-child(1) {
+	width:30px;
+	font-size:15px;
+	text-align:center;
+}
+
+.menu2_vert_item > div:nth-child(2) {
+	margin-left:4px;
+  flex: 1;
+}
+
+.menu2_vert_item > div:nth-child(3) {
+  width: 20px;
+	text-align:center;
+	white-space: nowrap;
+	font-size:12px ;
+}
+
+.menu2_vert_item_sep {
+	height:1px;
+	border-bottom:var(--vrItemSep);
+	z-index:-1;
+}
+
+// Menu Vertical Row Over
+.menu2_vert_item_over {
+	background:var(--vrItemOverBack);
+	border:var(--vrItemOverBorder);
+	border-radius:4px ;
+}
+
+/*
+CSS Menu yang lama
+*/
+.menu_hrz_main {
+	margin-left:0px;
+	top:0px;
+	left:0px;
+	padding-left:1px ;
+	background:var(--hzMainBack);
+	width:100%;
+	height:24px;
+}
+
+.menu_hrz_out {
+	cursor:default;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	padding:2px 4px 2px 4px;
+	border-width:1px 1px 1px 1px;
+	border-style:none;
+	height:22px;
+}
+.menu_hrz_over {
+	cursor:default;
+	padding:2px 4px 2px 4px;
+	background:var(--hzOverBack);
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	height:22px;
+	border-radius:4px;
+	color:var(--hzOverFont);
+}
+@keyframes menu-slide {
+	from { opacity: 0; } to { opacity: 0.93; } ;
+}
+.menu_vert_main {
+	animation: menu-slide 1s ease-in-out;
+	background-color:var(--vrMainBack);
+	border-color:var(--vrMainBorder);
+	opacity:0.93;
+	border-style:solid;
+	border-radius:4px;
+	border-width:1px 1px 1px 1px;
+	position:absolute;
+	display:none;
+	width:auto;
+	height:auto;
+	overflow:auto;
+	overflow-x:hidden;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+.menu_vert_item td{
+	padding:1px 2px 1px 5px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	height:28px;
+}
+.menu_vert_item td:first-child{
+	width:26px;
+	padding-left:1px;
+	font-size:15px;
+	text-align:center;
+	vertical-align: middle;
+	background: linear-gradient(to right, var(--vrItemFirst1), var(--vrItemFirst2));
+}
+.menu_vert_item td:last-child{
+	padding-right:1px;
+	width:20px;
+	text-align:center;
+}
+.menu_vert_item_over td{
+	background:var(--vrItemOverBack);
+	border:var(--vrItemOverBorder);
+	border-left:0px;
+	border-right:0px;
+	cursor:default;
+}
+.menu_vert_item_over td:first-child{
+	background:var(--vrItemOverBack);
+	border-left:var(--vrItemOverBorder);
+	padding-left:0px;
+	padding-top:0px;
+}
+.menu_vert_item_over td:last-child{
+	border-right:var(--vrItemOverBorder);
+	padding-right:0px;
+	text-align:center;
+}
+.menu_vert_item_sep td{
+	height:0px;
+	box-sizing: border-box; 
+	border-bottom:var(--vrItemSep);
+}
+.menu_vert_item_sep td:first-child{
+	height:1px;
+	border-bottom:0px;
+	box-sizing: border-box; 
+	background: linear-gradient(to right, var(--vrItemFirst1), var(--vrItemFirst2));
+}
+.menu_vert_item_sep2 td{
+	height:1px;
+	border-bottom:0px ;
+}
+.menu_vert_item_sep2 td:first-child{
+	height:1px;
+	border-bottom:0px;
+	background: linear-gradient(to right, var(--vrItemFirst1), var(--vrItemFirst2));
+}
+
+/*
+Definisi Div Kalau menu terlalu tinggi maka kita beri tombol scroll up down
+*/
+.divMenuScroll-Down,
+.divMenuScroll-Up {
+	display:none;
+	width:100%;
+	font-size:15px;
+	text-align:center;
+	background: var(--vrItemFirst1) ;
+	z-index: 5;
+	padding: 4px 0px;
+	cursor: default;
+	user-select: none;
+	border: 1px solid var(--vrItemFirst2);
+	border-radius: 4px;
+	height:28px;
+	box-sizing: border-box;
+	opacity:1;
+}
+.divMenuScroll-Down {
+	position: sticky;
+	bottom:0px;
+}
+.divMenuScroll-Up {
+	position:fixed;
+	top:0px ;
+}

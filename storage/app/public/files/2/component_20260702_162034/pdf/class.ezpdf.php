@@ -1,0 +1,3 @@
+<?php
+  // Dipindah Ke Autoload
+?>

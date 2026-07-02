@@ -1,0 +1,76 @@
+[01-Mar-2025 10:49:33 UTC] PHP Warning:  require(/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php): Failed to open stream: No such file or directory in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:49:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /DATA/arscorpi/public_html/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:49:36 UTC] PHP Warning:  require(/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php): Failed to open stream: No such file or directory in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:49:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /DATA/arscorpi/public_html/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:50:06 UTC] PHP Warning:  require(/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php): Failed to open stream: No such file or directory in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:50:06 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /DATA/arscorpi/public_html/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:50:07 UTC] PHP Warning:  require(/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php): Failed to open stream: No such file or directory in /DATA/arscorpi/public_html/index.php on line 15
+[01-Mar-2025 10:50:07 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/DATA/arscorpi/public_html/../../laravel/vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /DATA/arscorpi/public_html/index.php:15
+Stack trace:
+#0 {main}
+  thrown in /DATA/arscorpi/public_html/index.php on line 15
+[22-Nov-2025 02:18:37 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:20:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:20:36 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:21:00 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:21:27 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:24:46 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:28:09 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:35:37 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:38:49 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'xsl.so' (tried: /opt/cpanel/ea-php83/root/usr/lib64/php/modules/xsl.so (/lib64/libxslt.so.1: undefined symbol: valuePush, version LIBXML2_2.4.30), /opt/cpanel/ea-php83/root/usr/lib64/php/modules/xsl.so.so (/opt/cpanel/ea-php83/root/usr/lib64/php/modules/xsl.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[22-Nov-2025 02:39:17 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:41:08 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[22-Nov-2025 02:41:16 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[22-Nov-2025 02:41:20 UTC] PHP Deprecated:  laravel_version(): Implicitly marking parameter $version as nullable is deprecated, the explicit nullable type must be used instead in /home/pentame3/laravel/vendor/arcanedev/support/helpers.php on line 13
+[22-Nov-2025 02:42:32 UTC] PHP Deprecated:  laravel_version(): Implicitly marking parameter $version as nullable is deprecated, the explicit nullable type must be used instead in /home/pentame3/laravel/vendor/arcanedev/support/helpers.php on line 13
+[22-Nov-2025 02:42:47 UTC] PHP Deprecated:  laravel_version(): Implicitly marking parameter $version as nullable is deprecated, the explicit nullable type must be used instead in /home/pentame3/laravel/vendor/arcanedev/support/helpers.php on line 13
+[22-Nov-2025 09:42:47 Asia/Jakarta] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/pentame3/laravel/vendor/arcanedev/support/helpers.php:13) in /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/pentame3/...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():255}(2, 'Cannot modify h...', '/home/pentame3/...', 322)
+#2 /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.1 500 In...', true, 500)
+#3 /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():255}(Object(ErrorException))
+#8 {main}
+  thrown in /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php on line 322
+[22-Nov-2025 02:42:52 UTC] PHP Deprecated:  laravel_version(): Implicitly marking parameter $version as nullable is deprecated, the explicit nullable type must be used instead in /home/pentame3/laravel/vendor/arcanedev/support/helpers.php on line 13
+[22-Nov-2025 09:42:52 Asia/Jakarta] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/pentame3/laravel/vendor/arcanedev/support/helpers.php:13) in /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home/pentame3/...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():255}(2, 'Cannot modify h...', '/home/pentame3/...', 322)
+#2 /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.1 500 In...', true, 500)
+#3 /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():255}(Object(ErrorException))
+#8 {main}
+  thrown in /home/pentame3/laravel/vendor/symfony/http-foundation/Response.php on line 322
+[22-Nov-2025 02:43:25 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.33. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:43:27 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.33. in /home/pentame3/laravel/vendor/composer/platform_check.php on line 28
+[22-Nov-2025 02:47:57 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:358
+Stack trace:
+#0 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(17): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(915): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(890): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(575): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(149): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1220): Illuminate\Foundation\Http\Kernel->handle()
+#9 /home/pentame3/public_html/index.php(20): Illuminate\Foundation\Application->handleRequest()
+#10 {main}
+  thrown in /home/pentame3/laravel/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 358

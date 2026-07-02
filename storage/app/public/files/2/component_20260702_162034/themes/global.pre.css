@@ -1,0 +1,20 @@
+/*
+global.pre akan di akses pertama kali dalam Style jadi urutan akases adalah 
+1. global.pre.css
+2. themes/css.pre.css
+3. global.css
+4. themes/css.css
+
+Jadi di global.pre ini kita gunakan untuk definisi variable yang bisa kita isi nilai default, contoh text-color yang secara umum sama
+bisa kita definisikan di sini, nanti secara default akan di pakai di semua, kecuali akan di replace pada themes/css.pre.css
+*/
+:root {
+	--fontColor : #000 ;
+
+	/* Scroll Bar */
+	--ScrollBar: #cecece ;
+	--ScrollBarBack: #eee ;
+	
+	/* DBGRID */
+	--dbgHeadFontcolor: #000 ;			/* Font Color Header Grid */
+}

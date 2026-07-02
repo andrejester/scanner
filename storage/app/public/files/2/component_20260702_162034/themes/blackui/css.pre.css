@@ -1,0 +1,123 @@
+:root {
+	--bodyBackColor:#fefefe ;
+	--mainPanelBorder: #4d4d4d ;
+
+	--dbgCellBodyClick: #000000 ;
+	--dbgCellBodyClickBack: #c7c3c7 ;
+	--dbgCellHead1 : rgba(224,224,224,1) ;
+	--dbgCellHead2 : rgba(153,153,153,1) ;
+
+	/* Input */
+	--inpBorderColor : #666666 ;
+	--inputBack : #ffffff ;
+
+	/* Input onFocus */
+	--inpFocusBorder: #000000 ;
+	--inpFocusBack : #ffffff ;
+
+	/* Inpus Disable */
+	--inpDisabledBack: #eeeeee ;
+	--inpDisabledBorder: #bbbbbb ;
+
+	/* Button Class */
+	--ButtonBorder: #828282 ;
+	--ButtonColor1: #bababa ;
+	--ButtonColor2: #6b6a6b ;
+	--ButtonHoverBorder: #828282 ;
+	--ButtonHoverColor1: #bababa;
+	--ButtonHoverColor2: #6b6a6b;
+	--ButtonClickBorder: #828282 ;
+	--ButtonClickColor1: #6b6a6b;
+	--ButtonClickColor2: #bababa;
+	--ButtonFontColor: #FFFFFF ;
+	
+	/* Tab Class Name */
+	--tabMainBack : #eeeeee ;
+	--tabNormal1 : #ffffff ;
+	--tabNormal2 : #eeeeff ;
+	--tabClick1 : #bdb9bd ;
+	--tabClick2 : #3d3d3d ;
+	--tabClickFont : #ffffff ;
+	--tabFont : #000000 ;
+	--tabItemBorder: 1px solid #cccccc ;
+
+	/* Variable Menu Pulldown */
+	--hzMainBack : rgba(245,245,245,1) ;
+	--hzOverBack : #828282; ;
+	--hzOverFont : #FFFFFF ;
+	--vrMainBack : #fefefe ;
+	--vrMainBorder : #bbbbbb ;
+	--vrItemFirst1 : #e2e2e2 ;
+	--vrItemFirst2 : #d1d1d1 ;
+	--vrItemOverBack : #edeaed ;
+	--vrItemOverBorder : 1px solid #aaaaaa ;
+	--vrItemSep : 1px solid #d1d1d1 ;
+
+	/* Variable Form */
+	--winBorderBorder : #969396 ;
+	--winBorderBack : #FFFFFF ;
+	--winHeadFocus1 : #2A363B ; 
+	--winHeadFocus2 : #2A363B ;
+	--winHeadBlur1 : #86898a ;
+	--winHeadBlur2 : #86898a ;
+	--winHead : #ffffff ;
+
+	/* Form Icon Close */
+	--winClose : #ffffff ;
+	--winCloseHover : #ffffff ;
+	--winCloseHover1 : #e0a28d ;
+	--winCloseHover2 : #e04e1c ;
+
+	/* Form Icon Min */
+	--winMin : #ffffff ;
+	--winMinHover : #ffffff ;
+	--winMinHover1 : #eeeeee ;
+	--winMinHover2 : #999999 ;
+
+	/* Form Icon Panduan */
+	--winPan : #ffffff ;
+	--winPanHover : #ffffff ;
+	--winPanHover1 : #8fc7ed ;
+	--winPanHover2 : #2c98ce ;
+
+	/* Alert dan Confirm */
+	--alrMain : #eeeeee ;
+	--alrMainBorder : #999999 ;
+	--alrHead1 : #2A363B ;
+	--alrHead2 : #2A363B ;
+	--alrHead : #ffffff ;
+
+	/*
+	Status Bar
+	*/
+	--sBarBack1: #E4E4EE ;
+	--sBarBack2: #fefefe ;
+	--sBarBorder: #dddddd ;
+	
+	/* Slide Bar */
+	--sldColor: #000;
+	--sldBack1: #E4E4EE ;
+	--sldBack2: #fefefe ;
+	--sldBorder: #aaa ;
+	
+	--sldItemColor: #000 ;
+	--sldItemBorder: #aaa ;
+	--sldItemBack1: #dedede ;
+	--sldItemBack2: #dedede ;
+		
+	--sldItemOverColor: #000 ;
+	--sldItemOverBack1: #f9ecc9 ;
+	--sldItemOverBack2: #f9d87e ;
+	
+	--sldItemBlurColor: #888 ;
+	--sldItemBlurBack1: #f4f4f4 ;
+	--sldItemBlurBack2: #f4f4f4 ;
+	
+	/* Toolbar */
+	--tBarMain1: rgba(245,245,245,1) ;
+	--tBarMain2: rgba(209,209,209,1) ;
+	--tBarSep1: #999;
+	--tBarSep2: #fff;
+	--tBarOverBack : #f9cc81 ;
+	--tBarOverBorder : #080f86 ;
+}

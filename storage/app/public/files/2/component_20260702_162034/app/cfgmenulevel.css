@@ -1,0 +1,104 @@
+/* Remove default bullets */
+
+.ulMain {
+	list-style-type: none;
+	margin-left: -18px;
+	margin: 0;
+  padding: 0;
+	margin-right:10px;
+}
+
+.ulSub {
+  list-style-type: none;
+	margin-left: -5px;
+}
+
+.divCheck,
+.divExp,
+.divRow,
+.divButton,
+.divButtonCap,
+.divTree,
+.divtitle {
+	display: inline-block;
+	height:26px ;
+	vertical-align: top;
+	line-height:26px ;
+	cursor:default;
+	user-select:none;
+	padding:0px 0px 2px 0px ;
+}
+
+.divCheck,
+,divButton {
+	color: var(--inpBorderColor) ;
+}
+
+.divCheck:hover,
+.divButton:hover {
+	color: var(--inpFocusBorder) ;
+}
+
+.divExp {
+	padding-right:2px ;
+  padding-left:10px ;
+	font-size:15px;
+}
+
+.liMain {
+	border-left:0px ;
+}
+
+.liSub {
+	position: relative;
+}
+
+.divTree {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 1px;
+	background-color: #000;
+}
+
+.divRow {
+	width: 100%;
+	padding:0px 2px 0px 0px ;
+}
+
+.divRow-induk {
+	font-weight: bolder ;
+	background-color:#eeeeee ;
+}
+
+.divRowSep {
+	display:block;
+	width: 100%;
+	background-color:#dddddd ;
+	margin-top:2px;
+	margin-bottom:2px;
+	height:2px ;
+}
+
+.divRow:hover {
+	background: #dedede ;
+}
+
+.divCheck {
+	font-size:20px ;
+	padding-right:5px ;
+}
+
+.divButton {
+	float:right;
+	right:10px;
+	font-size:20px ;
+}
+
+.divButtonCap {
+	float:right;
+	right:10px;
+	padding-left:5px;
+	padding-right:2px;
+}

@@ -1,0 +1,271 @@
+/*
+	✅ aero
+	✅ biruui
+  ✅ blackui
+	✅ default
+	✅ hijauui
+	✅ jinggaui
+	✅ merah
+	✅ nilaui
+	✅ purple
+	✅ win10
+*/
+FONT {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px}
+TD {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px;white-space: nowrap;user-select:none;}
+BODY {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px;margin:0px;background-color:var(--bodyBackColor)}
+P {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px}
+DIV {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px}
+
+TEXTAREA {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px}
+FORM {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px;background-color:var(--bodyBackColor)}
+
+/* href */
+A:link {BACKGROUND: none; COLOR: #0000CC; FONT-SIZE: 12px; FONT-FAMILY: Verdana, Helvetica; text-decoration:none}
+A:active {BACKGROUND: none; COLOR: #0000CC; FONT-SIZE: 12px; FONT-FAMILY: Verdana, Helvetica; text-decoration:none}
+A:visited {BACKGROUND: none; COLOR: #0000CC; FONT-SIZE: 12px; FONT-FAMILY: Verdana, Helvetica; text-decoration:none}
+A:hover {BACKGROUND: none; COLOR: #0000CC; FONT-SIZE: 12px; FONT-FAMILY: Verdana, Helvetica; text-decoration:none}
+
+.panel_main {border:1px solid var(--mainPanelBorder);padding:4px;background-color:var(--bodyBackColor)}
+.table_body {FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px} /*#F4F4FF}*/
+
+/*
+Untuk Object Await
+*/
+.divWait {
+	display:block;
+	min-width: 150px;  
+	background-color: #333; 
+	color: #fff; 
+	text-align: center;
+	border-radius: 8px;
+  padding: 16px; 
+	position: absolute; 
+	user-select:none;
+	pointer-events: none;
+	opacity:0.5 ;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* CSS Snackbar */
+.snackbar_back,
+.snackbar_back_top {
+	width:auto ;
+	height:auto ;
+	right:5px;
+	position:fixed;
+	display: flex;  
+	pointer-events: none;
+	align-items: flex-end;
+}
+
+.snackbar_back {
+	bottom:5px;
+	flex-direction: column;	
+}
+
+.snackbar_back_top {
+	top:0px;
+	flex-direction: column-reverse;	
+}
+
+.snackbar_error,
+.snackbar_success,
+.snackbar {
+	display:block;
+	min-width: 250px;
+	width:auto;
+	color: #fff; 
+	text-align: center;
+	border-radius: 8px;
+  padding: 16px; 
+	position: relative;
+	opacity: 0; 
+	user-select:none;
+	pointer-events: none;
+	margin-top:5px;
+	float: right;
+  right: 0;
+	animation: fadebottom 3s !important;
+}
+
+.snackbar {
+	background-color: #666; 
+}
+
+.snackbar_error {
+	background-color: #e32 ;
+}
+
+.snackbar_success {
+	background-color: #198754 ;
+}
+
+@keyframes fadebottom {
+	0% {
+		transform: scale(0.5);
+		opacity: 0;
+	} 15% {
+		opacity: 0.7;
+		transform: scale(1);
+	} 80% {
+		opacity: 0.7;
+		transform: scale(1);
+	} 100% {
+		bottom:0px;
+		opacity: 0;
+		transform: scale(0.5);
+	}
+}
+
+.back_modal {
+	display:block;
+	position:fixed;
+	top:0;
+	left:0;
+	opacity:0.2;
+	background-color:#999999;
+	cursor:default;
+}
+.no_txt_select {user-select:none;}
+.wordwrap {white-space: nowrap;}
+
+/* Animasi Menu */
+@keyframes fadein {from { opacity: 0; } to   { opacity: 1; }}
+.fadein {
+	animation: fadein 1s;
+}
+
+@keyframes fadeout {from { opacity: 1; } to   { opacity: 0; }}
+.fadeout {
+	animation: fadeout 1s;
+}
+
+/*
+Status Baru, Bagian Bawah Form / Grid
+*/
+.sbar_main,
+.sbar_item {
+	background: linear-gradient(to top, var(--sBarBack1), var(--sBarBack2));
+}
+
+.sbar_main {
+	border-top:0px;
+	border-spacing:0px;
+	padding-right:2px;
+	width:100%;
+}
+.sbar_item {	
+	padding: 4px 5px;
+	font-size: 11px;
+	cursor: default;
+	border: 1px solid var(--sBarBorder);
+	text-align: center;
+	white-space: nowrap;
+	border-collapse: collapse;
+}
+
+/* 
+Kita Replace ScrollBar Standart dengan sesuai tema kita 
+*/
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	z-index:5;
+}
+
+/* Body Scroll Bar */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px ;
+	background: var(--ScrollBarBack);
+	opacity:0.9 ;
+}
+
+/* Handel Posisi Bar yang bergeser */
+::-webkit-scrollbar-thumb {
+	background: var(--ScrollBar); 
+}
+
+/* posisi Pokok Kanan Bawah Kalau ScrollBar Vetical dan Horizontal ada semua */
+::-webkit-resizer,
+::-webkit-scrollbar-corner {
+	background-color: var(--bodyBackColor) ;
+}
+
+/* Slidebar Windows List */
+.slide_bar {
+	top:0px;
+	left:0px;
+	width: 5px;
+	opacity:0;
+	display:block;
+	float:left;
+	position:fixed;
+	animation: fadeout 1s;
+	background: linear-gradient(var(--sldBack1), var(--sldBack2));
+	border:1px solid var(--sldBorder) ;
+	color: var(--sldColor) ;
+	transition: width 1s;
+	overflow:hidden
+}
+.slide_bar:hover {
+	animation: fadein 1s;
+	opacity:1;
+	width: 100px;
+}
+.slide_bar_item {
+	overflow:hidden;
+	cursor:default;
+	padding:4px;
+	left:4px;
+	margin-top:4px;
+	border:1px solid var(--sldItemBorder) ;
+	border-radius:5px;
+	width:90px;
+	white-space: nowrap;
+	color: var(--sldItemColor) ;
+	background: linear-gradient(var(--sldItemBack1), var(--sldItemBack2));
+}
+.slide_bar_item:hover {
+	color: var(--sldItemOverColor) ;
+	background: linear-gradient(var(--sldItemOverBack1), var(--sldItemOverBack2));
+}
+.slide_bar_item_blur {
+	color: var(--sldItemBlurColor) ;
+	background: linear-gradient(var(--sldItemBlurBack1), var(--sldItemBlurBack2));
+}
+
+/*
+Progress Bar
+*/
+.progress-containner {
+	position:relative;
+	width:100% ;
+	height:100% ;
+	border:0px ;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.progress-title {
+	position:absolute;
+	width:100% ;
+	height:100% ;
+	border:0px ;
+	box-sizing: border-box;
+	text-align: center;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress-bar {
+	position:absolute;
+	width:0 ;
+	height:100% ;
+	box-sizing: border-box;
+	background: linear-gradient(var(--winHeadFocus1), var(--winHeadFocus2));
+	opacity:0.7;
+}

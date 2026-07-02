@@ -1,0 +1,131 @@
+:root {
+	--bodyBackColor:#F4F4FF ;
+	--mainPanelBorder: #bbcbbb ; /* #64bc0f ; */
+
+	--dbgCellBodyClick: #ffffff ;
+	--dbgCellBodyClickBack: #34AD3A ;
+	--dbgCellHead1 : rgba(105,217,0,1) ;
+	--dbgCellHead2 : rgba(85,173,3,1) ;
+
+	/* Input */
+	--inpBorderColor :#64bc0f;
+	--inputBack : #fefefe ;
+
+	/* Input onFocus */
+	--inpFocusBorder: #64bc0f ;
+	--inpFocusBack : #d5f6ed ;
+
+	/* Inpus Disable */
+	--inpDisabledBack: #eeeeee ;
+	--inpDisabledBorder: #bbbbbb ;
+
+	/* Button Class */
+	--ButtonBorder: #64bc0f ;
+	--ButtonColor1: #7ce87c;
+	--ButtonColor2: #4ca84c;
+	--ButtonHoverBorder: #64bc0f ;
+	--ButtonHoverColor1: #7ce87c;
+	--ButtonHoverColor2: #4ca84c;
+	--ButtonClickBorder: #64bc0f ;
+	--ButtonClickColor1: #4ca84c;
+	--ButtonClickColor2: #7ce87c;
+	--ButtonFontColor: #111111 ;
+	
+	/* Tab Class Name */
+	--tabMainBack : #eeeeee ;
+	--tabNormal1 : #ffffff ;
+	--tabNormal2 : #eeeeff ;
+	--tabClick1 : #08441c ;
+	--tabClick2 : #08441c ;
+	--tabClickFont : #ffffff ;
+	--tabFont : #000000 ;
+	--tabItemBorder: 1px solid #cccccc ;
+
+	/* Variable Menu Pulldown */
+	--hzMainBack : rgba(162,199,50,1) ;
+	--hzOverBack : #367d5e; ;
+	--hzOverFont : #FFFFFF ;
+	--vrMainBack : #f6f6f6 ;
+	--vrMainBorder : #bbbbbb ;
+	--vrItemFirst1 : rgba(155,196,32,1) ;
+	--vrItemFirst2 : rgba(72,138,10,1) ;
+	--vrItemOverBack : #c7e9af ;
+	--vrItemOverBorder : 1px solid #68b332 ;
+	--vrItemSep : 1px solid #bbbbbb ;
+
+	/* Variable Form */
+	--winBorderBorder : #bbbbbb ;
+	--winBorderBack : #ffffff ;
+	--winHeadFocus1 : rgba(52,173,58,1) ;
+	--winHeadFocus2 :  rgba(41,143,45,1) ;
+	--winHeadBlur1 : rgba(226,226,226,1) ;
+	--winHeadBlur2 : rgba(219,219,219,1) ;
+	--winHead : #ffffff ;
+
+	/* Form Icon Close */
+	--winClose : #ffffff ;
+	--winCloseHover : #ffffff ;
+	--winCloseHover1 : #e0a28d ;
+	--winCloseHover2 : #e04e1c ;
+
+	/* Form Icon Min */
+	--winMin : #ffffff ;
+	--winMinHover : #ffffff ;
+	--winMinHover1 : #eeeeee ;
+	--winMinHover2 : #999999 ;
+
+	/*
+	Form Icon Panduan
+	*/
+	--winPan : #ffffff ;
+	--winPanHover : #ffffff ;
+	--winPanHover1 : #8fc7ed ;
+	--winPanHover2 : #2c98ce ;
+
+	/*
+	Alert dan Confirm
+	*/
+	--alrMain : #eeeeee ;
+	--alrMainBorder : #999999 ;
+	--alrHead1 : rgba(173,139,88,1) ;
+	--alrHead2 : rgba(217,174,111,1) ;
+	--alrHead : #FFFFFF ;
+
+	/*
+	Status Bar
+	*/
+	--sBarBack1: #E4E4EE ;
+	--sBarBack2: #F4F4FF ;
+	--sBarBorder: #dddddd ;
+	
+	/* Scroll Bar */
+	--ScrollBar: #cecece ;
+	--ScrollBarBack: #eeeeee ;
+	
+	/* Slide Bar */
+	--sldColor: #000;
+	--sldBack1: rgba(196,255,198,1) ;
+	--sldBack2: rgba(255,255,255,1) ;
+	--sldBorder: #ffe6e6 ;
+	
+	--sldItemColor: #fff ;
+	--sldItemBorder: #64e368 ;
+	--sldItemBack1: #34AD3A ;
+	--sldItemBack2: #34AD3A ;
+		
+	--sldItemOverColor: #000 ;
+	--sldItemOverBack1: #f9ecc9 ;
+	--sldItemOverBack2: #f9d87e ;
+	
+	--sldItemBlurColor: #888 ;
+	--sldItemBlurBack1: #f4f4f4 ;
+	--sldItemBlurBack2: #f4f4f4 ;
+	
+	/* Toolbar */
+	--tBarMain1: rgba(155,196,32,1) ;
+	--tBarMain2: rgba(72,138,10,1) ;
+	--tBarSep1: #999;
+	--tBarSep2: #fff;
+	--tBarOverBack : #f9cc81 ;
+	--tBarOverBorder : #080f86 ;
+}

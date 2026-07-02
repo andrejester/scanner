@@ -1,0 +1,178 @@
+/*
+Class Windows ( Open Form )
+*/
+.win_main {
+	position:absolute;
+	display:block;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+.win_main_custom {
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+.win_border {
+	position:absolute;
+	border:1px solid var(--winBorderBorder);
+	border-top:0px;
+	background-color: var(--winBorderBack) ;
+	border-radius:0px 5px 5px 0px ;
+}
+.win_header_focus {
+	background: linear-gradient(var(--winHeadFocus1), var(--winHeadFocus2));
+}
+.win_header_blur {
+	background: linear-gradient(var(--winHeadBlur1), var(--winHeadBlur2));
+}
+.win_header {
+	position:absolute;
+	display:block;
+	height:29px;
+	min-height:29px;
+	width:100%;
+	font-weight:bold;
+	text-align:left;
+	color:var(--winHead);
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	user-select:none; 
+}
+.win_title {
+	cursor:default;
+	FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 12px;
+	padding:0px;
+	margin:6px 0px 0px 6px;
+	pointer-events: none;
+}
+
+// Form Icon
+.win_icon_close,
+.win_icon_min,
+.win_icon_panduan {
+	FONT-FAMILY: Verdana,Helvetica; FONT-SIZE: 15px;
+	position:absolute;
+	top:0px;
+	cursor:default;
+	line-height:29px;
+	text-align:center;
+	width:40px;
+	height:29px;
+}
+.win_icon_close {
+	border-radius:1px 5px 0px 1px;
+	color: var(--winClose);
+	right:0px;
+}
+.win_icon_close:hover {
+	color: var(--winCloseHover);
+	background: linear-gradient(var(--winCloseHover1),var(--winCloseHover2));
+}
+.win_icon_min {
+	color: var(--winMin);
+	border-radius:1px;
+	right:40px;
+}
+.win_icon_min:hover {
+	color: var(--winMinHover) ;
+	background: linear-gradient(var(--winMinHover1), var(--winMinHover2));
+}
+.win_icon_panduan {
+	color: var(--winPan);
+	border-radius:1px;
+	right:80px;
+	display:none;
+}
+.win_icon_panduan:hover {
+	color:  var(--winPanHover) ;
+	background: linear-gradient(var(--winPanHover1), var(--winPanHover2));
+}
+.win_sbar {
+	display:block;
+	position:relative;
+	height:24px;
+	width:100%;
+	box-sizing: border-box;
+}
+
+/*
+Toolbar
+*/
+.tbar_main {
+	display:block;
+	height:30px;
+	box-sizing: border-box; 
+	background: linear-gradient(var(--tBarMain1),var(--tBarMain2));
+}
+.tbar_item_div {
+	display:inline-block ;
+	padding:2px 2px;
+	float:left;
+}
+.tbar_item_sep {
+	display:inline-block ;
+	width:2px;
+	float:left;
+	margin-top:2px;
+	margin-left:2px;
+	margin-right:2px;
+	height:26px;
+	background: linear-gradient(to right, var(--tBarSep1), var(--tBarSep2));
+}
+.tbar_item_txt {
+	padding:2px;
+	border:0;
+	line-height:20px;
+	cursor:default ;	
+}
+.tbar_item {
+	padding:2px;
+	border:0 ;
+}
+
+.tbar_item:hover {
+	padding:1px;
+	border:1px solid var(--tBarOverBorder);
+	background-color: var(--tBarOverBack) ;
+	border-radius:2px;
+}
+.tbar_item:disabled {
+	padding:2px;
+	border:0;
+	opacity: 0.3;
+	cursor:default
+}
+
+.tbar_dropdown{
+	position: relative;
+  display: inline-block;
+}
+
+.tbar_dropdown_content {
+		display: none; /* Sembunyikan konten dropdown secara default */
+		position: absolute;
+		min-width: 250px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+		border-radius: 5px;
+		padding: 10px;
+		grid-template-columns: repeat(3, 1fr);
+	  background: linear-gradient(var(--tBarMain1),var(--tBarMain2));
+}
+
+.tbar_dropdown_content.show {
+	display: grid; /* Tampilkan dropdown saat kelas 'show' ditambahkan */
+}
+
+.tbar_dropdown_content div {
+		text-align: center;
+		padding: 10px;
+		transition: background-color 0.3s;
+		cursor: pointer;
+}
+
+.tbar_dropdown_content div:hover {
+		background-color: #f1f1f1; 
+}
+.tbar_dropdown i {
+		font-size: 24px;
+		margin-bottom: 5px;
+}

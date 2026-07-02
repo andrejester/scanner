@@ -1,0 +1,160 @@
+/usr/local/lsws/fcgi-bin/lsnode.js:48
+    var app = require(startupFile);
+              ^
+
+Error [ERR_REQUIRE_ESM]: require() of ES Module /home/arsprope/laravel/laravel.js from /usr/local/lsws/fcgi-bin/lsnode.js not supported.
+laravel.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains "type": "module" which declares all .js files in that package scope as ES modules.
+Instead either rename laravel.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change "type": "module" to "type": "commonjs" in /home/arsprope/laravel/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).
+
+    at startApplication (/usr/local/lsws/fcgi-bin/lsnode.js:48:15)
+    at Object.<anonymous> (/usr/local/lsws/fcgi-bin/lsnode.js:16:1) {
+  code: 'ERR_REQUIRE_ESM'
+}
+
+Node.js v20.18.3
+/usr/local/lsws/fcgi-bin/lsnode.js:48
+    var app = require(startupFile);
+              ^
+
+Error [ERR_REQUIRE_ESM]: require() of ES Module /home/arsprope/laravel/laravel.js from /usr/local/lsws/fcgi-bin/lsnode.js not supported.
+laravel.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains "type": "module" which declares all .js files in that package scope as ES modules.
+Instead either rename laravel.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change "type": "module" to "type": "commonjs" in /home/arsprope/laravel/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).
+
+    at startApplication (/usr/local/lsws/fcgi-bin/lsnode.js:48:15)
+    at Object.<anonymous> (/usr/local/lsws/fcgi-bin/lsnode.js:16:1) {
+  code: 'ERR_REQUIRE_ESM'
+}
+
+Node.js v20.18.3
+/usr/local/lsws/fcgi-bin/lsnode.js:48
+    var app = require(startupFile);
+              ^
+
+Error [ERR_REQUIRE_ESM]: require() of ES Module /home/arsprope/laravel/laravel.js from /usr/local/lsws/fcgi-bin/lsnode.js not supported.
+laravel.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains "type": "module" which declares all .js files in that package scope as ES modules.
+Instead either rename laravel.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change "type": "module" to "type": "commonjs" in /home/arsprope/laravel/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).
+
+    at startApplication (/usr/local/lsws/fcgi-bin/lsnode.js:48:15)
+    at Object.<anonymous> (/usr/local/lsws/fcgi-bin/lsnode.js:16:1) {
+  code: 'ERR_REQUIRE_ESM'
+}
+
+Node.js v20.18.3
+/usr/local/lsws/fcgi-bin/lsnode.js:48
+    var app = require(startupFile);
+              ^
+
+Error [ERR_REQUIRE_ESM]: require() of ES Module /home/arsprope/laravel/laravel.js from /usr/local/lsws/fcgi-bin/lsnode.js not supported.
+laravel.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains "type": "module" which declares all .js files in that package scope as ES modules.
+Instead either rename laravel.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change "type": "module" to "type": "commonjs" in /home/arsprope/laravel/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).
+
+    at startApplication (/usr/local/lsws/fcgi-bin/lsnode.js:48:15)
+    at Object.<anonymous> (/usr/local/lsws/fcgi-bin/lsnode.js:16:1) {
+  code: 'ERR_REQUIRE_ESM'
+}
+
+Node.js v20.18.3
+/usr/local/lsws/fcgi-bin/lsnode.js:48
+    var app = require(startupFile);
+              ^
+
+Error [ERR_REQUIRE_ESM]: require() of ES Module /home/arsprope/laravel/laravel.js from /usr/local/lsws/fcgi-bin/lsnode.js not supported.
+laravel.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains "type": "module" which declares all .js files in that package scope as ES modules.
+Instead either rename laravel.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change "type": "module" to "type": "commonjs" in /home/arsprope/laravel/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).
+
+    at startApplication (/usr/local/lsws/fcgi-bin/lsnode.js:48:15)
+    at Object.<anonymous> (/usr/local/lsws/fcgi-bin/lsnode.js:16:1) {
+  code: 'ERR_REQUIRE_ESM'
+}
+
+Node.js v20.18.3
+file:///home/pentame3/laravel/laravel.js:1
+var http = require('http');
+           ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and '/home/pentame3/laravel/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///home/pentame3/laravel/laravel.js:1:12
+    at ModuleJobSync.runSync (node:internal/modules/esm/module_job:450:37)
+    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:429:47)
+    at loadESMFromCJS (node:internal/modules/cjs/loader:1519:24)
+    at Module._compile (node:internal/modules/cjs/loader:1670:5)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Module._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+Node.js v22.18.0
+file:///home/pentame3/laravel/laravel.js:1
+var http = require('http');
+           ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and '/home/pentame3/laravel/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///home/pentame3/laravel/laravel.js:1:12
+    at ModuleJobSync.runSync (node:internal/modules/esm/module_job:450:37)
+    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:429:47)
+    at loadESMFromCJS (node:internal/modules/cjs/loader:1519:24)
+    at Module._compile (node:internal/modules/cjs/loader:1670:5)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Module._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+Node.js v22.18.0
+file:///home/pentame3/laravel/laravel.js:1
+var http = require('http');
+           ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and '/home/pentame3/laravel/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///home/pentame3/laravel/laravel.js:1:12
+    at ModuleJobSync.runSync (node:internal/modules/esm/module_job:450:37)
+    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:429:47)
+    at loadESMFromCJS (node:internal/modules/cjs/loader:1519:24)
+    at Module._compile (node:internal/modules/cjs/loader:1670:5)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Module._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+Node.js v22.18.0
+file:///home/pentame3/laravel/laravel.js:1
+var http = require('http');
+           ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and '/home/pentame3/laravel/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///home/pentame3/laravel/laravel.js:1:12
+    at ModuleJobSync.runSync (node:internal/modules/esm/module_job:450:37)
+    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:429:47)
+    at loadESMFromCJS (node:internal/modules/cjs/loader:1519:24)
+    at Module._compile (node:internal/modules/cjs/loader:1670:5)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Module._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+Node.js v22.18.0
+file:///home/pentame3/laravel/laravel.js:1
+var http = require('http');
+           ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and '/home/pentame3/laravel/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///home/pentame3/laravel/laravel.js:1:12
+    at ModuleJobSync.runSync (node:internal/modules/esm/module_job:450:37)
+    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:429:47)
+    at loadESMFromCJS (node:internal/modules/cjs/loader:1519:24)
+    at Module._compile (node:internal/modules/cjs/loader:1670:5)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1820:10)
+    at Module.load (node:internal/modules/cjs/loader:1423:32)
+    at Module._load (node:internal/modules/cjs/loader:1246:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+
+Node.js v22.18.0

@@ -1,0 +1,175 @@
+{
+    "pages": [
+        {
+            "name": "Dashboard",
+            "icon": "bx-home",
+            "url": "dashboard"
+        },
+        {
+            "name": "File Manager",
+            "icon": "bxs-file-image",
+            "url": "file-manager"
+        },
+        {
+            "name": "Note",
+            "icon": "bxs-user-account",
+            "url": "notes"
+        },
+        {
+            "name": "Sambutan Direktur",
+            "icon": "bx-user-voice",
+            "url": "mastersambutandirektur"
+        },
+        {
+            "name": "Profil Kampus",
+            "icon": "bx-buildings",
+            "url": "masterprofilkampus"
+        },
+        {
+            "name": "Banner Utama",
+            "icon": "bx-image",
+            "url": "banner"
+        },
+        {
+            "name": "Banner Iklan",
+            "icon": "bx-image",
+            "url": "banner-ads"
+        },
+        {
+            "name": "Tagline",
+            "icon": "bx-bookmark",
+            "url": "mastertagline"
+        },
+        {
+            "name": "Program S2",
+            "icon": "bx-book-open",
+            "url": "masterprogramstudiS2"
+        },
+        {
+            "name": "Program S3",
+            "icon": "bx-book-open",
+            "url": "masterprogramstudiS3"
+        },
+        {
+            "name": "Pendaftaran S2",
+            "icon": "bx-edit",
+            "url": "masterpendaftaranprodiS2"
+        },
+        {
+            "name": "Pendaftaran S3",
+            "icon": "bx-edit",
+            "url": "masterpendaftaranprodiS3"
+        },
+        {
+            "name": "Persyaratan Ujian",
+            "icon": "bx-file",
+            "url": "masterpersyaratanujian"
+        },
+        {
+            "name": "Akreditasi",
+            "icon": "bx-award",
+            "url": "masterakreditasi"
+        },
+        {
+            "name": "Kegiatan Mahasiswa",
+            "icon": "bx-calendar-event",
+            "url": "masterkegiatanmahasiswa"
+        },
+        {
+            "name": "Alumni",
+            "icon": "bx-group",
+            "url": "masteralumni"
+        },
+        {
+            "name": "Pendaftaran Alumni",
+            "icon": "bx-user-plus",
+            "url": "alumnitmp"
+        },
+        {
+            "name": "Layanan Akademik",
+            "icon": "bx-donate-heart",
+            "url": "masterlayanan"
+        },
+        {
+            "name": "Daftar Jurnal",
+            "icon": "bx-book-content",
+            "url": "masterjurnal"
+        },
+        {
+            "name": "Kategori Jurnal",
+            "icon": "bx-book-content",
+            "url": "masterkategorijurnal"
+        },
+        {
+            "name": "Kalender Akademik",
+            "icon": "bx-bell",
+            "url": "masterkalenderakademik"
+        },
+        {
+            "name": "Master Beasiswa",
+            "icon": "bx-bell",
+            "url": "masterbeasiswa"
+        },
+        {
+            "name": "Pengumuman",
+            "icon": "bx-bell",
+            "url": "masterpengumuman"
+        },
+        {
+            "name": "Comments",
+            "icon": "bx-comment",
+            "url": "comments"
+        },
+        {
+            "name": "FAQ",
+            "icon": "bx-question-mark",
+            "url": "masterfaq"
+        },
+        {
+            "name": "Berita Kampus",
+            "icon": "bx-book",
+            "url": "blogadmin"
+        },
+        {
+            "name": "Kategori Berita",
+            "icon": "bx-category",
+            "url": "masterkategoriberita"
+        },
+        {
+            "name": "Event",
+            "icon": "bx-calendar-star",
+            "url": "masterevent"
+        },
+        {
+            "name": "Inbox",
+            "icon": "bx-envelope",
+            "url": "inbox"
+        },
+        {
+            "name": "Users",
+            "icon": "bx-check-shield",
+            "url": "user"
+        },
+        {
+            "name": "Permission",
+            "icon": "bx-check-shield",
+            "url": "permission"
+        },
+        {
+            "name": "Backup Database",
+            "icon": "bx-data",
+            "url": "backup"
+        },
+        {
+            "name": "Versi Aplikasi",
+            "icon": "bx-time",
+            "url": "versi"
+        },
+        {
+            "name": "Log Activity",
+            "icon": "bx-list-ul",
+            "url": "/log-viewer"
+        }
+    ]
+}
+

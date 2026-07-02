@@ -1,0 +1,9 @@
+{
+    "Student": true,
+    "Blog": true,
+    "Webinar": true,
+    "Trainer": true,
+    "Kelas": true,
+    "Video": true,
+    "Slf": true
+}

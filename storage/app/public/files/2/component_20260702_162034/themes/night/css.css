@@ -1,0 +1,76 @@
+FONT,
+TD,
+TH,
+DIV,
+SPAN,
+BODY {
+	color:#ddd ;
+}
+
+
+/*.tbar_main {
+	display:block;
+	border-bottom:1px solid #333;
+	background: #333333;
+	background: linear-gradient(to down, #333333, #000000);
+}
+.tbar_item_div {
+	padding:0px 1px 0px 1px;
+	display:block;
+	position:relative;
+	float:left
+}
+.tbar_item_sep {
+	display:block;
+	width:2px;
+	position:relative;
+	float:left;
+	margin-top:2px;
+	margin-left:2px;
+	margin-right:2px;
+	background: linear-gradient(to right, #999999, #ffffff);
+}
+.tbar_item_txt {
+	padding:1px;
+	border:0;
+	cursor:default
+}
+.tbar_item {
+	padding:1px;
+	border:0
+}
+.tbar_item:hover {
+	padding:0px;
+	border:1px solid #080f86;
+	background-color:#f9cc81
+}
+.tbar_item:disabled {
+	padding:1px;
+	border:0;
+	opacity: 0.3;
+	cursor:default
+}*/
+
+/*
+Main Menu
+*/
+.menu_hrz_out,
+.menu_vert_item {
+	color:#ffffff
+}
+
+/*
+DBGRID
+*/
+.dbg_cell_header2,
+.dbg_cell_body2,
+.dbg_cell_footer2,
+.dbg_footer_main2,
+.dbg_main2 {
+	border-color:#555555 ;
+}
+
+.dbg_cell_body_click2 {
+	background-color:#666666 ;
+  color:#F5F5F5 ;
+}
