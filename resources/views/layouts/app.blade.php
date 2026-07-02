@@ -344,20 +344,6 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('profile-user.index') }}">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    @can('setting_read')
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('setting.index') }}">
-                                                <i class="bx bx-cog me-2"></i>
-                                                <span class="align-middle">Settings</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                    <li>
                                         <a class="dropdown-item" target="_blank" onclick="logout(event)">
 
                                             <i class="bx bx-power-off me-2"></i>
@@ -446,8 +432,6 @@
     @stack('custom_js')
     @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 
-    {{-- Web Push Notification --}}
-    @include('layouts.partials.web-push')
 
 </body>
 

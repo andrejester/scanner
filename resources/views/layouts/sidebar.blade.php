@@ -33,22 +33,6 @@
         </li>
     @endcan
 
-    @can('versi_read')
-        <li class="menu-item" id="versi">
-            <a href="{{ route('versi.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-time"></i>
-                <div class="text-truncate" data-i18n="Versi Aplikasi">Versi Aplikasi</div>
-            </a>
-        </li>
-    @endcan
-
-    <li class="menu-item" id="log-activity">
-        <a href="{{ url('/log-viewer') }}" class="menu-link" target="_blank">
-            <i class="menu-icon tf-icons bx bx-list-ul"></i>
-            <div class="text-truncate" data-i18n="Log Activity">Log Activity</div>
-        </a>
-    </li>
-
     @if (app()->environment('local', 'development'))
         <li class="menu-item" id="database-reset">
             <a href="{{ route('system.database-reset.index') }}" class="menu-link">

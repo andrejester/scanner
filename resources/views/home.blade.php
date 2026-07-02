@@ -31,11 +31,8 @@
                                 <i class="bx bx-time-five me-1"></i>{{ now()->format('d M Y, H:i') }}
                             </p>
                             <div class="d-flex flex-wrap gap-2">
-                                <a href="{{ route('profile-user.index') }}" class="btn btn-sm btn-primary">
+                                <a href="" class="btn btn-sm btn-primary">
                                     <i class="bx bx-user me-1"></i>Profile
-                                </a>
-                                <a href="{{ url('/') }}" class="btn btn-sm btn-outline-info" target="_blank">
-                                    <i class="bx bx-globe me-1"></i>Lihat Website
                                 </a>
                                 <a href="https://boxicons.com" class="btn btn-sm btn-outline-secondary" target="_blank">
                                     <i class="bx bx-link-external me-1"></i>Ikon

@@ -246,6 +246,28 @@ class FileScannerController extends Controller
         // 9. NU AING BRO – string tanda tangan lokal / graffiti backdoor Indonesia
         'NU\s+AING\s+BRO'                            => '[IOC] NU AING BRO (Indonesian Backdoor Tag)',
         'NUAINGBRO\|nu_aing_bro'                     => '[IOC] NU AING BRO Variant',
+
+        // ---- Pattern Tambahan: GitHub, YP, Bule, Token ----
+
+        // 10. GitHub – referensi ke GitHub di dalam file PHP (download payload / C2 via raw.githubusercontent)
+        'raw\.githubusercontent\.com'                => '[IOC] GitHub Raw Content (kemungkinan payload download)',
+        'github\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+' => '[IOC] GitHub Repository Reference',
+        'github_token\|GITHUB_TOKEN\|gh_token'       => '[IOC] GitHub Token / Credential',
+
+        // 11. YP – tanda tangan / tag graffiti attacker Indonesia (singkatan kelompok/alias)
+        '\bYP\b'                                     => '[IOC] YP Tag (Attacker Signature)',
+        'yp_shell\|yp_backdoor\|ypshell'             => '[IOC] YP Shell Variant',
+
+        // 12. Bule – istilah slang yang muncul di beberapa backdoor lokal Indonesia
+        '\bbule\b'                                   => '[IOC] Bule Tag (Indonesian Backdoor Marker)',
+        'bule_shell\|buleshell'                      => '[IOC] Bule Shell Identifier',
+
+        // 13. Token – token hardcoded (API key, bearer token, bot token)
+        // Pattern: variabel bernama token berisi string panjang alfanumerik (≥20 char)
+        'bot_token\|BOT_TOKEN\|botToken'             => '[IOC] Hardcoded Bot Token',
+        'api_token\|API_TOKEN\|apiToken'             => '[IOC] Hardcoded API Token',
+        'bearer\s+[A-Za-z0-9_\-\.]{20,}'            => '[IOC] Hardcoded Bearer Token',
+        '\$token\s*=\s*[\'"][A-Za-z0-9_\-\.]{20,}[\'"]' => '[IOC] Hardcoded Token Value',
     ];
 
     // =========================================================================
@@ -471,7 +493,69 @@ class FileScannerController extends Controller
     // CORE SCANNER ENGINE
     // =========================================================================
 
-    private function scanFile(string $filePath): ?array
+    // =========================================================================
+    // WHITELIST CHECK
+    // =========================================================================
+
+    /**
+     * Cek apakah konten file adalah guard/placeholder yang sah dari framework,
+     * sehingga tidak perlu di-scan lebih lanjut.
+     *
+     * Contoh file yang dikecualikan:
+     *   <?php defined( 'main' ) or die( 'Restricted access' ) ?>
+     *   <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+     *   <?php if ( ! defined( 'ABSPATH' ) ) { die; } ?>
+     */
+    private function isWhitelisted(string $content): bool
+    {
+        // Trim BOM dan whitespace luar
+        $trimmed = trim($content, "\xEF\xBB\xBF \t\n\r\0\x0B");
+
+        // Whitelist hanya berlaku untuk file sangat pendek (<= 300 karakter)
+        if (strlen($trimmed) > 300) {
+            return false;
+        }
+
+        // Pattern guard framework yang sah.
+        // Menggunakan strpos untuk menghindari masalah quoting di regex.
+        // Cukup deteksi: file hanya berisi satu baris "defined(...) or die/exit"
+        // tanpa kode lain di belakangnya.
+
+        // Hapus tag PHP pembuka dan penutup, trim sisa
+        $inner = preg_replace('/^<\?php\s*/i', '', $trimmed);
+        $inner = rtrim($inner, " \t\n\r?>");
+        $inner = trim($inner);
+
+        // File benar-benar kosong setelah tag PHP
+        if ($inner === '') {
+            return true;
+        }
+
+        // Harus hanya satu statement: defined(...) or die/exit(...)
+        // Tidak boleh ada baris lain / kode tambahan
+        if (substr_count($trimmed, "\n") > 2) {
+            return false;
+        }
+
+        // Cocokkan pola: defined('APAPUN') or die/exit(...)
+        if (preg_match("/^defined\s*\(\s*[\'\"][A-Za-z_][A-Za-z0-9_]*[\'\"]\s*\)\s+(?:or|OR)\s+(?:die|exit)\s*(?:\([^)]{0,100}\))?\s*;?$/i", $inner)) {
+            return true;
+        }
+
+        // Cocokkan pola: if (!defined('APAPUN')) { die; }
+        if (preg_match("/^if\s*\(\s*!\s*defined\s*\(\s*[\'\"][A-Za-z_][A-Za-z0-9_]*[\'\"]\s*\)\s*\)\s*\{?\s*(?:die|exit)\s*(?:\([^)]{0,100}\))?\s*;?\s*\}?$/i", $inner)) {
+            return true;
+        }
+
+        // Hanya komentar PHP
+        if (preg_match('/^\/\/[^\n]*$/i', $inner)) {
+            return true;
+        }
+
+        return false;
+    }
+
+        private function scanFile(string $filePath): ?array
     {
         try {
             $content  = File::get($filePath);
@@ -479,6 +563,26 @@ class FileScannerController extends Controller
             $fileHash = hash_file('sha256', $filePath);
             $fileName = basename($filePath);
             $ext      = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+
+            // ---- Whitelist Check ----
+            // File yang hanya berisi guard statement (mis. defined('main') or die(...))
+            // adalah file placeholder framework yang sah — skip scan langsung.
+            if ($this->isWhitelisted($content)) {
+                Log::info("Whitelisted (guard file): {$filePath}");
+                return FileScanner::create([
+                    'file_path'           => $this->makeRelativePath($filePath),
+                    'file_name'           => $fileName,
+                    'file_size'           => $fileSize,
+                    'file_hash'           => $fileHash,
+                    'threat_level'        => 'safe',
+                    'threat_type'         => 'Bersih (Guard File — Whitelisted)',
+                    'suspicious_patterns' => [],
+                    'scan_result'         => 'clean',
+                    'scanned_by'          => auth()->id(),
+                    'scanned_at'          => now(),
+                    'is_quarantined'      => false,
+                ])->toArray();
+            }
 
             $detections = [];
             $score      = 0;
@@ -831,6 +935,73 @@ class FileScannerController extends Controller
                 $score += 50;
             }
 
+            // ---- 21h. GitHub reference (literal) ----
+            // File PHP yang mengandung referensi raw.githubusercontent atau GitHub repo
+            // sering digunakan untuk mengunduh payload tambahan atau C2 staging
+            if (stripos($content, 'raw.githubusercontent.com') !== false) {
+                $detections[] = '[IOC] GitHub Raw Content — kemungkinan unduh payload dari GitHub';
+                $score += 45;
+            }
+            if (preg_match('/github\.com\/[a-zA-Z0-9_\-]+\/[a-zA-Z0-9_\-]+/i', $content)) {
+                $detections[] = '[IOC] GitHub Repository Reference ditemukan di file PHP';
+                $score += 25;
+            }
+            if (
+                stripos($content, 'GITHUB_TOKEN') !== false
+                || stripos($content, 'github_token') !== false
+                || stripos($content, 'gh_token') !== false
+            ) {
+                $detections[] = '[IOC] GitHub Token/Credential Hardcoded';
+                $score += 40;
+            }
+
+            // ---- 21i. YP Tag (literal, case-sensitive untuk hindari false positive) ----
+            if (
+                strpos($content, 'YP Shell') !== false
+                || strpos($content, 'ypshell') !== false
+                || strpos($content, 'yp_shell') !== false
+                || preg_match('/\[\s*YP\s*\]|\bYP\s+backdoor\b/i', $content)
+            ) {
+                $detections[] = '[IOC] YP Tag — Attacker Signature Indonesia';
+                $score += 50;
+            }
+
+            // ---- 21j. Bule Tag (literal) ----
+            if (
+                stripos($content, 'bule_shell') !== false
+                || stripos($content, 'buleshell') !== false
+                || preg_match('/\bbule\s+shell\b|\bbule\s+backdoor\b/i', $content)
+            ) {
+                $detections[] = '[IOC] Bule Tag — Indonesian Backdoor Marker';
+                $score += 50;
+            }
+
+            // ---- 21k. Hardcoded Token (literal) ----
+            // Bot token Telegram: format numerik:string (contoh: 123456789:AAHxxx...)
+            if (preg_match('/\d{8,10}:[A-Za-z0-9_\-]{35,}/s', $content)) {
+                $detections[] = '[IOC] Telegram Bot Token Hardcoded';
+                $score += 50;
+            }
+            // Bearer / API token hardcoded
+            if (
+                stripos($content, 'BOT_TOKEN') !== false
+                || stripos($content, 'bot_token') !== false
+                || stripos($content, 'API_TOKEN') !== false
+                || stripos($content, 'api_token') !== false
+            ) {
+                $detections[] = '[IOC] API/Bot Token Constant Hardcoded';
+                $score += 35;
+            }
+            // Bearer token in Authorization header
+            if (preg_match('/Authorization[\'"\s:]+Bearer\s+[A-Za-z0-9_\-\.]{20,}/i', $content)) {
+                $detections[] = '[IOC] Hardcoded Bearer Token dalam Authorization header';
+                $score += 40;
+            }
+
+            // ---- 23. Folder Context Check ----
+            // Cek apakah file berada dalam folder yang prefixnya mencurigakan berdasarkan konteks
+            $this->checkFolderContext($filePath, $detections, $score);
+
             // ---- 22. Malware Scoring ----
             $threatLevel = $this->scoreToLevel($score);
             $threatType  = $this->scoreToType($score, $detections);
@@ -1128,5 +1299,107 @@ class FileScannerController extends Controller
             return $legacy;
         }
         return null;
+    }
+
+    // =========================================================================
+    // FOLDER CONTEXT CHECK
+    // =========================================================================
+
+    /**
+     * Periksa apakah file berada di dalam folder dengan konteks mencurigakan:
+     *
+     * A. Folder prefix "chat" → tidak boleh ada file .php sama sekali.
+     *    Folder chat hanya seharusnya berisi teks/gambar/audio.
+     *    Kehadiran .php di sini = kemungkinan webshell yang diunggah melalui fitur chat.
+     *
+     * B. Folder prefix "foto" (atau "photo", "image", "img", "gallery", "galeri") →
+     *    hanya boleh berisi file gambar (jpg, jpeg, png, gif, bmp, webp, svg, ico).
+     *    File dengan ekstensi lain = mencurigakan (mis. .php, .exe, .sh tersembunyi di folder foto).
+     *
+     * Method ini memodifikasi $detections dan $score by reference.
+     */
+    private function checkFolderContext(string $filePath, array &$detections, int &$score): void
+    {
+        // Ambil semua segmen path untuk menemukan folder yang relevan
+        $segments = explode(DIRECTORY_SEPARATOR, str_replace('/', DIRECTORY_SEPARATOR, $filePath));
+        $ext      = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+        $fileName = basename($filePath);
+
+        // Ekstensi gambar yang dianggap sah di folder foto
+        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'ico', 'tiff', 'tif', 'avif', 'heic'];
+
+        // Prefix folder chat (nama folder yang dimulai dengan kata ini, case-insensitive)
+        $chatPrefixes = ['chat'];
+
+        // Prefix folder foto/gambar
+        $fotoPrefixes = ['foto', 'photo', 'photos', 'image', 'images', 'img', 'gallery', 'galeri', 'gambar', 'picture', 'pictures'];
+
+        foreach ($segments as $i => $segment) {
+            $segLower = strtolower($segment);
+
+            // ---- A. Folder CHAT: file .php tidak boleh ada ----
+            foreach ($chatPrefixes as $prefix) {
+                if (str_starts_with($segLower, $prefix)) {
+                    $phpExtensions = ['php', 'php3', 'php4', 'php5', 'php7', 'phtml', 'phar', 'phps'];
+                    if (in_array($ext, $phpExtensions)) {
+                        $detections[] = sprintf(
+                            '[FolderCtx] File PHP ditemukan di folder CHAT (%s): %s — kemungkinan webshell yang diunggah via fitur chat',
+                            $segment,
+                            $fileName
+                        );
+                        $score += 60; // File PHP di folder chat sangat mencurigakan
+                    }
+                    // File tanpa ekstensi di folder chat yang mengandung PHP header
+                    // sudah tertangkap di check 15c, tidak perlu duplikasi
+                    break;
+                }
+            }
+
+            // ---- B. Folder FOTO: file non-gambar tidak boleh ada ----
+            foreach ($fotoPrefixes as $prefix) {
+                if (str_starts_with($segLower, $prefix)) {
+                    if (!in_array($ext, $imageExtensions)) {
+                        // Tentukan severity berdasarkan ekstensi
+                        $phpExtensions = ['php', 'php3', 'php4', 'php5', 'php7', 'phtml', 'phar', 'phps'];
+                        $execExtensions = ['sh', 'bash', 'py', 'pl', 'rb', 'exe', 'bat', 'cmd', 'ps1'];
+
+                        if (in_array($ext, $phpExtensions)) {
+                            $detections[] = sprintf(
+                                '[FolderCtx] File PHP ditemukan di folder FOTO (%s): %s — bukan file gambar, kemungkinan webshell',
+                                $segment,
+                                $fileName
+                            );
+                            $score += 65; // PHP di folder foto = sangat mencurigakan
+                        } elseif (in_array($ext, $execExtensions)) {
+                            $detections[] = sprintf(
+                                '[FolderCtx] File eksekusi (%s) ditemukan di folder FOTO (%s): %s',
+                                $ext,
+                                $segment,
+                                $fileName
+                            );
+                            $score += 55;
+                        } elseif ($ext === '') {
+                            // File tanpa ekstensi di folder foto
+                            $detections[] = sprintf(
+                                '[FolderCtx] File TANPA ekstensi di folder FOTO (%s): %s — tidak wajar untuk folder gambar',
+                                $segment,
+                                $fileName
+                            );
+                            $score += 40;
+                        } else {
+                            // Ekstensi lain (txt, html, js, zip, dll) di folder foto
+                            $detections[] = sprintf(
+                                '[FolderCtx] File .%s ditemukan di folder FOTO (%s): %s — bukan file gambar',
+                                $ext,
+                                $segment,
+                                $fileName
+                            );
+                            $score += 20;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
     }
 }
