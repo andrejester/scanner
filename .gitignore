@@ -18,3 +18,4 @@ yarn-error.log
 /.vscode
 storage/*.key
 TODO.md
+storage/app/public/files/**
