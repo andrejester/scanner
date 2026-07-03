@@ -20,17 +20,5 @@ class TelegramService extends Controller
         $this->client = new Client();
     }
 
-    public function sendMessage($message)
-    {
-        /*
-        $url = "https://api.telegram.org/bot{$this->token}/sendMessage";
-
-        $this->client->post($url, [
-            'form_params' => [
-                'chat_id' => $this->chatId,
-                'text' => $message
-            ]
-        ]);
-        */
-    }
+    public function sendMessage($message) {}
 }
