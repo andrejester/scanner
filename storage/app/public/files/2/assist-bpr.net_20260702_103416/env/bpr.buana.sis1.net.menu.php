@@ -1,2 +1,0 @@
-<submenu:PostingAkhirBulanPPAPKredit>	
-<submenu:PostingAkhirBulanPPAPKredit@msSubModul_Kredit>

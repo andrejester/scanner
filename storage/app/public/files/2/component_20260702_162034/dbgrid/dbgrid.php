@@ -1,3 +1,0 @@
-<?php
-$dbg = new DBGrid() ;
-?>

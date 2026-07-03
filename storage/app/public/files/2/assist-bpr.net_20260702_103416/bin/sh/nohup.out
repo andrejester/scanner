@@ -1,40 +1,0 @@
-=== Request at Fri May 15 13:12:17 WIB 2026 ===
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   162  100   162    0     0   2177      0 --:--:-- --:--:-- --:--:--  2189
-HTTP/1.1 200 OK
-date: Fri, 15 May 2026 06:12:17 GMT
-server: Apache/2.4.52 (Ubuntu)
-set-cookie: ASSISTSESSID=4h7kmnfisauncjg2nk59jfm5kf; expires=Fri, 15-May-2026 07:12:17 GMT; Max-Age=3600; path=/
-expires: Thu, 19 Nov 1981 08:52:00 GMT
-cache-control: no-store, no-cache, must-revalidate
-pragma: no-cache
-vary: Accept-Encoding
-content-length: 162
-content-type: text/html; charset=UTF-8
-
-<br />
-<b>Warning</b>:  Undefined variable $sdfdfsdfsdfsd in <b>/var/www/prg/app/mvc/assist-bpr.net/mvc/api/atm_bepede.controller.php</b> on line <b>11</b><br />
-
----------------------------
-
-=== Request at Fri May 15 13:12:20 WIB 2026 ===
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   162  100   162    0     0   3688      0 --:--:-- --:--:-- --:--:--  3767
-HTTP/1.1 200 OK
-date: Fri, 15 May 2026 06:12:20 GMT
-server: Apache/2.4.52 (Ubuntu)
-set-cookie: ASSISTSESSID=schau2b4srjqbv0q9hdpelntdu; expires=Fri, 15-May-2026 07:12:20 GMT; Max-Age=3600; path=/
-expires: Thu, 19 Nov 1981 08:52:00 GMT
-cache-control: no-store, no-cache, must-revalidate
-pragma: no-cache
-vary: Accept-Encoding
-content-length: 162
-content-type: text/html; charset=UTF-8
-
-<br />
-<b>Warning</b>:  Undefined variable $sdfdfsdfsdfsd in <b>/var/www/prg/app/mvc/assist-bpr.net/mvc/api/atm_bepede.controller.php</b> on line <b>11</b><br />
-
----------------------------
-

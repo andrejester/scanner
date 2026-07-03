@@ -1,1 +1,0 @@
-<? defined( 'main' ) or die( 'Restricted access' ) ?>

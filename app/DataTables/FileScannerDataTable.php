@@ -92,17 +92,19 @@ class FileScannerDataTable extends DataTable
                 // Flag dari deteksi hasil scan: PHP tersembunyi & file manager
                 $patterns = $row->suspicious_patterns ?? [];
                 foreach ($patterns as $p) {
-                    if (str_contains($p, 'TANPA ekstensi berisi kode PHP')) {
+                    $pLabel = is_array($p) ? ($p['label'] ?? '') : $p;
+                    if (str_contains($pLabel, 'TANPA ekstensi berisi kode PHP')) {
                         $fileWarnings[] = 'PHP tanpa ekstensi';
                         break;
                     }
-                    if (str_contains($p, 'berisi kode PHP')) {
+                    if (str_contains($pLabel, 'berisi kode PHP')) {
                         $fileWarnings[] = 'PHP tersembunyi';
                         break;
                     }
                 }
                 foreach ($patterns as $p) {
-                    if (str_contains($p, 'File Manager') || str_contains($p, 'Shell fungsional')) {
+                    $pLabel = is_array($p) ? ($p['label'] ?? '') : $p;
+                    if (str_contains($pLabel, 'File Manager') || str_contains($pLabel, 'Shell fungsional')) {
                         $fileWarnings[] = 'File Manager/Shell';
                         break;
                     }
@@ -172,15 +174,17 @@ class FileScannerDataTable extends DataTable
     {
         return $model->newQuery()
             ->with('user')
-            // Hanya tampilkan medium ke atas — low dan safe disembunyikan
-            ->whereNotIn('threat_level', ['low', 'safe'])
+            // Hanya tampilkan high ke atas — medium, low, dan safe disembunyikan
+            ->whereIn('threat_level', ['critical', 'high'])
             ->selectRaw('*, CASE
                 WHEN threat_level = "critical" THEN 1
                 WHEN threat_level = "high"     THEN 2
                 WHEN threat_level = "medium"   THEN 3
                 ELSE 4
-            END as threat_order')
+            END as threat_order,
+            JSON_LENGTH(COALESCE(suspicious_patterns, "[]")) as detection_count')
             ->orderBy('threat_order', 'asc')
+            ->orderBy('detection_count', 'desc')
             ->orderBy('scanned_at', 'desc');
     }
 

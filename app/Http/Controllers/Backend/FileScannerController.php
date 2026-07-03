@@ -178,96 +178,126 @@ class FileScannerController extends Controller
 
     // 21. IOC Scanner – tanda tangan webshell terkenal
     private array $iocPatterns = [
-        'FilesMan'                           => '[IOC] FilesMan Shell',
-        'WSO\s*Shell'                        => '[IOC] WSO Shell',
-        'C99Shell'                           => '[IOC] C99 Shell',
-        'r57shell'                           => '[IOC] R57 Shell',
-        'b374k'                              => '[IOC] B374K Shell',
-        'China\s*Chopper'                    => '[IOC] China Chopper',
-        'Weevely'                            => '[IOC] Weevely Shell',
-        'IndoXploit'                         => '[IOC] IndoXploit Shell',
-        'Deface'                             => '[IOC] Deface Marker',
-        '@error_reporting\(0\).*@set_time_limit' => '[IOC] Shell Init Pattern',
-        // Telegram exfiltration
-        'api\.telegram\.org'                 => '[IOC] Telegram Exfiltration',
-        'sendMessage.*chat_id'               => '[IOC] Telegram Bot sendMessage',
-        // Exfil via URL dengan data sensitif
-        'REMOTE_ADDR.*sendMessage'           => '[IOC] IP Exfiltration via Bot',
-        'file_get_contents.*sendMessage'     => '[IOC] Silent HTTP Exfiltration',
-        // Known C2 patterns
-        'curl_setopt.*CURLOPT_POSTFIELDS.*\$_' => '[IOC] C2 Data Exfil via cURL',
-        'base64_decode.*eval\|eval.*base64_decode' => '[IOC] Eval-Decode Loop',
-        // File manager shells terkenal
-        'Gelay\|Mini\s*Shell\|MiniShell'     => '[IOC] Gelay/Mini Shell',
-        '\$scandir\s*=\s*array\s*\('         => '[IOC] FilesMan scandir pattern',
-        'fm_password_hash\|fm_login'         => '[IOC] FM Login System (dua/filemanager)',
-        '\$login_password_hash'              => '[IOC] FM Password Hash',
-        'ob_start.*session_start.*error_reporting\(E_ALL\)' => '[IOC] File Manager Init Pattern',
-        'function\s+msb\s*\(\$t\)'          => '[IOC] msb() — Gelay Shell signature',
 
-        // ---- Pattern Tambahan: Secure PHP File Manager & WSO Variants ----
+        // =========================
+        // Known Webshell
+        // =========================
+        'FilesMan' => '[IOC] FilesMan Shell',
+        'WSO\s*Shell|WSO\b' => '[IOC] WSO Shell',
+        'SMokWSO|SMok\s*WSO|SmokWso|smok_wso' => '[IOC] SMokWSO Variant',
+        'C99Shell|c99\b' => '[IOC] C99 Shell',
+        'r57shell|r57\b' => '[IOC] R57 Shell',
+        'b374k' => '[IOC] B374K Shell',
+        'China\s*Chopper' => '[IOC] China Chopper',
+        'Weevely' => '[IOC] Weevely Shell',
+        'IndoXploit' => '[IOC] IndoXploit Shell',
+        'Mini\s*Shell|MiniShell|Gelay' => '[IOC] Mini Shell',
+        'Deface' => '[IOC] Deface Marker',
 
-        // 1. SECURE PHP FILE MANAGER - COMPLETE
-        // Terdeteksi dari string judul/header yang muncul di file manager jenis ini
-        'SECURE\s+PHP\s+FILE\s+MANAGER'             => '[IOC] Secure PHP File Manager Shell',
-        'SecureFileManager\|secure_file_manager'     => '[IOC] Secure File Manager Identifier',
+        // =========================
+        // Secure PHP File Manager
+        // =========================
+        'SECURE\s+PHP\s+FILE\s+MANAGER' => '[IOC] Secure PHP File Manager',
+        'SecureFileManager|secure_file_manager' => '[IOC] Secure File Manager Identifier',
+        'fm_secure_session' => '[IOC] FM Secure Session',
+        'fm_login|fm_password_hash|login_password_hash' => '[IOC] File Manager Authentication',
+        'fm_session_id|fm_set_session' => '[IOC] File Manager Session',
 
-        // 2. Adminer – Compact database management
-        // Adminer adalah tool DB management single-file yang sering disalahgunakan
-        'Adminer\s*[-–]\s*Compact\s+database\s+management' => '[IOC] Adminer (DB Management Tool)',
-        'adminer\.org'                               => '[IOC] Adminer Reference',
-        'class\s+Adminer\s*\{'                       => '[IOC] Adminer Class Definition',
+        // =========================
+        // Adminer
+        // =========================
+        'Adminer\s*[-–]\s*Compact\s+database\s+management' => '[IOC] Adminer',
+        'class\s+Adminer\s*\{' => '[IOC] Adminer Class',
+        'adminer\.org' => '[IOC] Adminer Reference',
+        'Jakub\s+Vrana' => '[IOC] Adminer Author',
 
-        // 3. SMokWSO – varian WSO Shell dengan nama "SMok"
-        'SMokWSO'                                    => '[IOC] SMokWSO Shell',
-        'SMok\s*WSO'                                 => '[IOC] SMok WSO Shell Variant',
-        'smok_wso\|SmokWso'                          => '[IOC] SMok WSO Identifier',
+        // =========================
+        // Hardcoded Password
+        // =========================
+        '\$2[aby]\$\d{2}\$[A-Za-z0-9./]{53}' => '[IOC] bcrypt Password Hash',
+        'ADMIN_PASSWORD_HASH' => '[IOC] Admin Password Hash',
+        'ADMIN_PASSWORD_LEGACY' => '[IOC] Legacy Password',
+        'define\s*\(\s*[\'"]ADMIN_PASSWORD_HASH[\'"]' => '[IOC] define(ADMIN_PASSWORD_HASH)',
+        'define\s*\(\s*[\'"]ADMIN_PASSWORD_LEGACY[\'"]' => '[IOC] define(ADMIN_PASSWORD_LEGACY)',
 
-        // 4. Jakub Vrana – nama pembuat Adminer/phpMyAdmin tools (file berbahaya sering menyertakan nama ini)
-        'Jakub\s+Vrana'                              => '[IOC] Jakub Vrana (Adminer Author)',
+        // =========================
+        // Shell Initialization
+        // =========================
+        '@error_reporting\s*\(\s*0\s*\).*@set_time_limit' => '[IOC] Shell Init',
+        'ob_start\s*\(\).*session_start\s*\(\).*error_reporting' => '[IOC] File Manager Init',
+        'function\s+msb\s*\(\s*\$t\s*\)' => '[IOC] msb() Function',
+        '\$scandir\s*=\s*array\s*\(' => '[IOC] FilesMan Pattern',
 
-        // 5. bcrypt hash $2y$12$ – hash password hardcoded (admin backdoor credential)
-        // Pattern: $2y$12$ diikuti 53 karakter base64-alphabet
-        '\$2y\$\d+\$[A-Za-z0-9./]{53}'              => '[IOC] Hardcoded bcrypt Password Hash',
-        '\$2a\$\d+\$[A-Za-z0-9./]{53}'              => '[IOC] Hardcoded bcrypt Password Hash (2a)',
+        // =========================
+        // Dangerous Execution
+        // =========================
+        'eval\s*\(' => '[IOC] eval()',
+        'assert\s*\(' => '[IOC] assert()',
+        'system\s*\(' => '[IOC] system()',
+        'shell_exec\s*\(' => '[IOC] shell_exec()',
+        'passthru\s*\(' => '[IOC] passthru()',
+        'exec\s*\(' => '[IOC] exec()',
+        'proc_open\s*\(' => '[IOC] proc_open()',
+        'popen\s*\(' => '[IOC] popen()',
 
-        // 6. ADMIN_PASSWORD_HASH – konstanta/variabel password hash yang hardcoded
-        'ADMIN_PASSWORD_HASH'                        => '[IOC] Hardcoded Admin Password Hash Constant',
-        'define\s*\(\s*[\'"]ADMIN_PASSWORD_HASH[\'"]' => '[IOC] Admin Password Hash Define',
+        // =========================
+        // Obfuscation
+        // =========================
+        'base64_decode\s*\(' => '[IOC] base64_decode',
+        'gzinflate\s*\(' => '[IOC] gzinflate',
+        'gzuncompress\s*\(' => '[IOC] gzuncompress',
+        'str_rot13\s*\(' => '[IOC] ROT13',
+        'create_function\s*\(' => '[IOC] create_function',
+        'preg_replace\s*\(.*?/e' => '[IOC] preg_replace /e',
+        'base64_decode.*eval|eval.*base64_decode' => '[IOC] Eval Decode Loop',
 
-        // 7. ADMIN_PASSWORD_LEGACY – kredensial legacy yang tertinggal
-        'ADMIN_PASSWORD_LEGACY'                      => '[IOC] Legacy Admin Password Constant',
-        'define\s*\(\s*[\'"]ADMIN_PASSWORD_LEGACY[\'"]' => '[IOC] Admin Password Legacy Define',
+        // =========================
+        // Telegram
+        // =========================
+        'api\.telegram\.org' => '[IOC] Telegram API',
+        'sendMessage.*chat_id' => '[IOC] Telegram sendMessage',
+        'REMOTE_ADDR.*sendMessage' => '[IOC] Telegram IP Exfil',
+        'file_get_contents.*sendMessage' => '[IOC] Telegram HTTP Exfil',
 
-        // 8. fm_secure_session – session management khas Secure PHP File Manager
-        'fm_secure_session'                          => '[IOC] FM Secure Session (File Manager Auth)',
-        'fm_session_id\|fm_set_session'              => '[IOC] File Manager Session Function',
+        // =========================
+        // GitHub
+        // =========================
+        'raw\.githubusercontent\.com' => '[IOC] GitHub Raw',
+        'github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+' => '[IOC] GitHub Repository',
+        'GITHUB_TOKEN|github_token|gh_token' => '[IOC] GitHub Token',
 
-        // 9. NU AING BRO – string tanda tangan lokal / graffiti backdoor Indonesia
-        'NU\s+AING\s+BRO'                            => '[IOC] NU AING BRO (Indonesian Backdoor Tag)',
-        'NUAINGBRO\|nu_aing_bro'                     => '[IOC] NU AING BRO Variant',
+        // =========================
+        // Curl Exfiltration
+        // =========================
+        'curl_setopt.*CURLOPT_POSTFIELDS.*\$_' => '[IOC] CURL Exfiltration',
+        'CURLOPT_URL' => '[IOC] CURL URL',
+        'CURLOPT_POSTFIELDS' => '[IOC] CURL POSTFIELDS',
 
-        // ---- Pattern Tambahan: GitHub, YP, Bule, Token ----
+        // =========================
+        // Hardcoded Token
+        // =========================
+        'BOT_TOKEN|bot_token|botToken' => '[IOC] Bot Token',
+        'API_TOKEN|api_token|apiToken' => '[IOC] API Token',
+        'bearer\s+[A-Za-z0-9._\-]{20,}' => '[IOC] Bearer Token',
+        '\$token\s*=\s*[\'"][A-Za-z0-9._\-]{20,}[\'"]' => '[IOC] Hardcoded Token',
 
-        // 10. GitHub – referensi ke GitHub di dalam file PHP (download payload / C2 via raw.githubusercontent)
-        'raw\.githubusercontent\.com'                => '[IOC] GitHub Raw Content (kemungkinan payload download)',
-        'github\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+' => '[IOC] GitHub Repository Reference',
-        'github_token\|GITHUB_TOKEN\|gh_token'       => '[IOC] GitHub Token / Credential',
+        // =========================
+        // Indonesian Tags
+        // =========================
+        'NU\s*AING\s*BRO|NUAINGBRO|nu_aing_bro' => '[IOC] NU AING BRO',
+        '\bYP\b|yp_shell|yp_backdoor|ypshell' => '[IOC] YP Signature',
+        '\bbule\b|bule_shell|buleshell' => '[IOC] Bule Signature',
 
-        // 11. YP – tanda tangan / tag graffiti attacker Indonesia (singkatan kelompok/alias)
-        '\bYP\b'                                     => '[IOC] YP Tag (Attacker Signature)',
-        'yp_shell\|yp_backdoor\|ypshell'             => '[IOC] YP Shell Variant',
-
-        // 12. Bule – istilah slang yang muncul di beberapa backdoor lokal Indonesia
-        '\bbule\b'                                   => '[IOC] Bule Tag (Indonesian Backdoor Marker)',
-        'bule_shell\|buleshell'                      => '[IOC] Bule Shell Identifier',
-
-        // 13. Token – token hardcoded (API key, bearer token, bot token)
-        // Pattern: variabel bernama token berisi string panjang alfanumerik (≥20 char)
-        'bot_token\|BOT_TOKEN\|botToken'             => '[IOC] Hardcoded Bot Token',
-        'api_token\|API_TOKEN\|apiToken'             => '[IOC] Hardcoded API Token',
-        'bearer\s+[A-Za-z0-9_\-\.]{20,}'            => '[IOC] Hardcoded Bearer Token',
-        '\$token\s*=\s*[\'"][A-Za-z0-9_\-\.]{20,}[\'"]' => '[IOC] Hardcoded Token Value',
+        // =========================
+        // Generic Backdoor
+        // =========================
+        'Web\s*Shell' => '[IOC] Web Shell',
+        'shell\b' => '[IOC] Shell Keyword',
+        'backdoor' => '[IOC] Backdoor',
+        'cmd\.php' => '[IOC] cmd.php',
+        'upload\.php' => '[IOC] upload.php',
+        'console\.php' => '[IOC] console.php',
+        'filemanager' => '[IOC] File Manager',
     ];
 
     // =========================================================================
@@ -555,7 +585,7 @@ class FileScannerController extends Controller
         return false;
     }
 
-        private function scanFile(string $filePath): ?array
+    private function scanFile(string $filePath): ?array
     {
         try {
             $content  = File::get($filePath);
@@ -587,10 +617,22 @@ class FileScannerController extends Controller
             $detections = [];
             $score      = 0;
 
+            // Pre-split lines sekali untuk efisiensi pencarian baris
+            $lines = explode("\n", $content);
+
+            // Helper closure: rekam deteksi + cari nomor baris dari pattern
+            $detect = function (string $label, string $pattern = '') use (&$detections, $lines) {
+                $lineNums = [];
+                if ($pattern !== '') {
+                    $lineNums = $this->findMatchingLines($lines, $pattern);
+                }
+                $detections[] = ['label' => $label, 'lines' => $lineNums];
+            };
+
             // ---- 1. Signature Scanner ----
             foreach ($this->signaturePatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 8;
                 }
             }
@@ -598,7 +640,7 @@ class FileScannerController extends Controller
             // ---- 2. Dangerous Combinations ----
             foreach ($this->dangerousCombinations as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 40; // Dinaikkan dari 20 → 40: kombinasi ini hampir pasti backdoor
                 }
             }
@@ -606,7 +648,7 @@ class FileScannerController extends Controller
             // ---- 3. Superglobal Input ----
             foreach ($this->superglobalPatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 5;
                 }
             }
@@ -614,7 +656,7 @@ class FileScannerController extends Controller
             // ---- 4. Obfuscation ----
             foreach ($this->obfuscationPatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 10;
                 }
             }
@@ -622,7 +664,7 @@ class FileScannerController extends Controller
             // ---- 5. Encoded String ----
             // Base64 panjang tanpa spasi (>500 char)
             if (preg_match_all('/[A-Za-z0-9+\/]{500,}={0,2}/', $content, $matches)) {
-                $detections[] = '[Enc] Long Base64 String (' . count($matches[0]) . 'x)';
+                $detect('[Enc] Long Base64 String (' . count($matches[0]) . 'x)', '[A-Za-z0-9+\/]{500,}={0,2}');
                 $score += count($matches[0]) * 15;
             }
             // Base64 medium dengan whitespace di tengah (≥200 char setelah strip spasi) — teknik evasion umum
@@ -630,7 +672,7 @@ class FileScannerController extends Controller
                 foreach ($matchesWs[0] as $candidate) {
                     $stripped = preg_replace('/\s+/', '', $candidate);
                     if (strlen($stripped) >= 200 && base64_decode($stripped, true) !== false) {
-                        $detections[] = '[Enc] Obfuscated Base64 with Whitespace (len=' . strlen($stripped) . ')';
+                        $detect('[Enc] Obfuscated Base64 with Whitespace (len=' . strlen($stripped) . ')', '[A-Za-z0-9+\/\s]{300,}={0,2}');
                         $score += 25;
                         break;
                     }
@@ -638,33 +680,40 @@ class FileScannerController extends Controller
             }
             // Base64 di dalam string PHP literal yang di-eval
             if (@preg_match('/eval\s*\(\s*base64_decode\s*\(\s*[\'"][A-Za-z0-9+\/\s]{50,}={0,2}[\'"]/', $content)) {
-                $detections[] = '[Enc] eval(base64_decode) with embedded payload';
+                $detect('[Enc] eval(base64_decode) with embedded payload', 'eval\s*\(\s*base64_decode\s*\(');
                 $score += 50; // Langsung +50: ini signature backdoor klasik
             }
 
             // ---- 6. Hex String ----
             if (@preg_match('/\\\\x[0-9a-fA-F]{2}|0x[0-9a-fA-F]{4,}/i', $content)) {
-                $detections[] = '[Hex] Hex Encoded Payload';
+                $detect('[Hex] Hex Encoded Payload', '\\\\x[0-9a-fA-F]{2}|0x[0-9a-fA-F]{4,}');
                 $score += 12;
             }
 
             // ---- 7. Very Long Line (> 1000 karakter) ----
-            $lines = explode("\n", $content);
-            $longLineCount = 0;
-            foreach ($lines as $line) {
+            $longLineCount  = 0;
+            $longLineNums   = [];
+            foreach ($lines as $lineIdx => $line) {
                 if (strlen($line) > 1000) {
                     $longLineCount++;
+                    $longLineNums[] = $lineIdx + 1;
+                    if (count($longLineNums) >= 10) {
+                        break;
+                    }
                 }
             }
             if ($longLineCount > 0) {
-                $detections[] = '[LongLine] Very Long Line (' . $longLineCount . ' baris)';
+                $detections[] = [
+                    'label' => '[LongLine] Very Long Line (' . $longLineCount . ' baris)',
+                    'lines' => $longLineNums,
+                ];
                 $score += $longLineCount * 10;
             }
 
             // ---- 8. Suspicious Variable ----
             foreach ($this->suspiciousVariablePatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 8;
                 }
             }
@@ -672,7 +721,7 @@ class FileScannerController extends Controller
             // ---- 9. Dynamic Function Call ----
             foreach ($this->dynamicCallPatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 10;
                 }
             }
@@ -680,7 +729,7 @@ class FileScannerController extends Controller
             // ---- 10 & 11. Dynamic Include / Remote Include ----
             foreach ($this->includePatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 15;
                 }
             }
@@ -688,25 +737,25 @@ class FileScannerController extends Controller
             // ---- 12. Hidden Upload ----
             foreach ($this->uploadPatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 7;
                 }
             }
 
             // ---- 13. Image Shell (ekstensi ganda) ----
-            if (preg_match('/\.(jpg|jpeg|png|gif|bmp|webp)\.(php\d?|phtml|phar)/i', $fileName)) {
-                $detections[] = '[ImgShell] Double Extension: ' . $fileName;
-                $score += 30;
-            }
-            if (in_array($ext, $this->suspiciousExtensions)) {
-                $detections[] = '[ImgShell] Suspicious Extension: .' . $ext;
-                $score += 20;
-            }
+            // if (preg_match('/\.(jpg|jpeg|png|gif|bmp|webp)\.(php\d?|phtml|phar)/i', $fileName)) {
+            //     $detections[] = ['label' => '[ImgShell] Double Extension: ' . $fileName, 'lines' => []];
+            //     $score += 30;
+            // }
+            // if (in_array($ext, $this->suspiciousExtensions)) {
+            //     $detections[] = ['label' => '[ImgShell] Suspicious Extension: .' . $ext, 'lines' => []];
+            //     $score += 20;
+            // }
 
             // ---- 14. Fake Image (tag PHP di file gambar) ----
             if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'bmp'])) {
                 if (@preg_match('/<\?php/i', $content)) {
-                    $detections[] = '[FakeImg] PHP Tag in Image File';
+                    $detect('[FakeImg] PHP Tag in Image File', '<\?php');
                     $score += 40;
                 }
             }
@@ -715,7 +764,7 @@ class FileScannerController extends Controller
             $fileNameLower = strtolower(pathinfo($fileName, PATHINFO_FILENAME));
             foreach ($this->suspiciousFilenames as $sus) {
                 if (str_contains($fileNameLower, $sus)) {
-                    $detections[] = '[SusFile] Nama file mencurigakan: ' . $fileName;
+                    $detections[] = ['label' => '[SusFile] Nama file mencurigakan: ' . $fileName, 'lines' => []];
                     $score += 25;
                     break;
                 }
@@ -725,35 +774,35 @@ class FileScannerController extends Controller
             $nameOnly = pathinfo($fileName, PATHINFO_FILENAME);
             // Nama file terlalu pendek (1-2 karakter) dan berekstensi php
             if (strlen($nameOnly) <= 2 && in_array($ext, ['php', 'phtml', 'phar'])) {
-                $detections[] = '[SusFile] Nama file sangat pendek: ' . $fileName;
+                $detections[] = ['label' => '[SusFile] Nama file sangat pendek: ' . $fileName, 'lines' => []];
                 $score += 20;
             }
             // Nama file terlihat random: semua hex / string alfanumerik panjang tanpa makna
             if (strlen($nameOnly) >= 8 && preg_match('/^[a-f0-9]{8,}$/i', $nameOnly)) {
-                $detections[] = '[SusFile] Nama file tampak hash/random: ' . $fileName;
+                $detections[] = ['label' => '[SusFile] Nama file tampak hash/random: ' . $fileName, 'lines' => []];
                 $score += 15;
             }
             // Nama file angka semua
             if (preg_match('/^\d{4,}$/', $nameOnly)) {
-                $detections[] = '[SusFile] Nama file berupa angka: ' . $fileName;
+                $detections[] = ['label' => '[SusFile] Nama file berupa angka: ' . $fileName, 'lines' => []];
                 $score += 10;
             }
             // Nama file dengan karakter tidak lazim (bukan huruf/angka/strip/titik)
             if (preg_match('/[^a-zA-Z0-9\-_.()]/', $nameOnly)) {
-                $detections[] = '[SusFile] Nama file mengandung karakter tidak lazim: ' . $fileName;
+                $detections[] = ['label' => '[SusFile] Nama file mengandung karakter tidak lazim: ' . $fileName, 'lines' => []];
                 $score += 10;
             }
             // Ekstensi ganda (file.php.jpg, file.jpg.php)
-            if (substr_count($fileName, '.') >= 2) {
-                // Cek apakah ada ekstensi php/phtml tersembunyi
-                if (
-                    preg_match('/\.(php\d?|phtml|phar)\./i', $fileName) ||
-                    preg_match('/\.(jpg|jpeg|png|gif|bmp|webp)\.(php\d?|phtml|phar)$/i', $fileName)
-                ) {
-                    $detections[] = '[SusFile] Ekstensi ganda berbahaya: ' . $fileName;
-                    $score += 35;
-                }
-            }
+            // if (substr_count($fileName, '.') >= 2) {
+            //     // Cek apakah ada ekstensi php/phtml tersembunyi
+            //     if (
+            //         preg_match('/\.(php\d?|phtml|phar)\./i', $fileName) ||
+            //         preg_match('/\.(jpg|jpeg|png|gif|bmp|webp)\.(php\d?|phtml|phar)$/i', $fileName)
+            //     ) {
+            //         $detections[] = ['label' => '[SusFile] Ekstensi ganda berbahaya: ' . $fileName, 'lines' => []];
+            //         $score += 35;
+            //     }
+            // }
 
             // ---- 15c. PHP Tersembunyi di File Non-PHP ----
             // Mendeteksi file seperti "gelay", "dua", "index" (tanpa ekstensi)
@@ -761,10 +810,10 @@ class FileScannerController extends Controller
             $phpExtensions = ['php', 'php3', 'php4', 'php5', 'php7', 'phtml', 'phar', 'phps'];
             if (!in_array($ext, $phpExtensions) && @preg_match('/<\?php|<\?=/i', $content)) {
                 if ($ext === '') {
-                    $detections[] = '[SusFile] File TANPA ekstensi berisi kode PHP: ' . $fileName;
+                    $detect('[SusFile] File TANPA ekstensi berisi kode PHP: ' . $fileName, '<\?php|<\?=');
                     $score += 50; // Sangat mencurigakan — tidak ada alasan sah untuk ini
                 } else {
-                    $detections[] = '[SusFile] Ekstensi .' . $ext . ' berisi kode PHP: ' . $fileName;
+                    $detect('[SusFile] Ekstensi .' . $ext . ' berisi kode PHP: ' . $fileName, '<\?php|<\?=');
                     $score += 35;
                 }
             }
@@ -789,14 +838,14 @@ class FileScannerController extends Controller
                 if (@preg_match('/' . $p . '/i', $content)) $fmIndicators++;
             }
             if ($fmIndicators >= 4) {
-                $detections[] = '[FM] File Manager / Shell fungsional terdeteksi (' . $fmIndicators . ' fungsi FM)';
+                $detect('[FM] File Manager / Shell fungsional terdeteksi (' . $fmIndicators . ' fungsi FM)', implode('|', array_keys($fmChecks)));
                 $score += $fmIndicators * 12; // 4 fungsi = +48, 8 fungsi = +96
             }
 
             // ---- 16. Permission Scanner ----
             foreach ($this->permissionPatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 12;
                 }
             }
@@ -804,7 +853,7 @@ class FileScannerController extends Controller
             // ---- 17. Recently Modified (dalam 7 hari) ----
             $mtime = filemtime($filePath);
             if ($mtime && (time() - $mtime) < 604800) {
-                $detections[] = '[Recent] Modified < 7 hari: ' . date('d/m/Y H:i', $mtime);
+                $detections[] = ['label' => '[Recent] Modified < 7 hari: ' . date('d/m/Y H:i', $mtime), 'lines' => []];
                 $score += 5;
             }
 
@@ -816,17 +865,17 @@ class FileScannerController extends Controller
             // ---- 19. Entropy Scanner ----
             $entropy = $this->calculateEntropy($content);
             if ($entropy > 5.5) {
-                $detections[] = sprintf('[Entropy] Entropy tinggi: %.2f (threshold 5.5)', $entropy);
+                $detections[] = ['label' => sprintf('[Entropy] Entropy tinggi: %.2f (threshold 5.5)', $entropy), 'lines' => []];
                 $score += (int)(($entropy - 5.5) * 20);
             }
 
             // ---- 20. YARA-style Rules ----
             if (@preg_match('/\$\w+\s*=\s*str_rot13\s*\(.*\);\s*\$\w+\s*=\s*base64_decode\s*\(/is', $content)) {
-                $detections[] = '[YARA] Multi-layer obfuscation chain';
+                $detect('[YARA] Multi-layer obfuscation chain', '\$\w+\s*=\s*str_rot13\s*\(');
                 $score += 30;
             }
             if (@preg_match('/error_reporting\s*\(\s*0\s*\).*@?set_time_limit/is', $content)) {
-                $detections[] = '[YARA] Shell initialization pattern';
+                $detect('[YARA] Shell initialization pattern', 'error_reporting\s*\(\s*0\s*\)');
                 $score += 25;
             }
 
@@ -850,7 +899,8 @@ class FileScannerController extends Controller
                     ];
                     foreach ($decodedChecks as $p => $l) {
                         if (@preg_match('/' . $p . '/is', $decoded)) {
-                            $detections[] = $l;
+                            // Tandai baris base64_decode di file asli
+                            $detect($l, 'base64_decode\s*\(');
                             $score += 40; // Payload tersembunyi = sangat berbahaya
                         }
                     }
@@ -860,7 +910,7 @@ class FileScannerController extends Controller
             // ---- 21. IOC Scanner ----
             foreach ($this->iocPatterns as $pattern => $label) {
                 if (@preg_match('/' . $pattern . '/is', $content)) {
-                    $detections[] = $label;
+                    $detect($label, $pattern);
                     $score += 35;
                 }
             }
@@ -882,24 +932,24 @@ class FileScannerController extends Controller
                     && !str_contains($filePath, 'config/')
                     && preg_match('/\$2[ayb]\$\d{2}\$[A-Za-z0-9\.\/]{53}/', $content)
                 ) {
-                    $detections[] = '[IOC] Hardcoded bcrypt Hash ditemukan (kemungkinan kredensial backdoor)';
+                    $detect('[IOC] Hardcoded bcrypt Hash ditemukan (kemungkinan kredensial backdoor)', '\$2[ayb]\$\d{2}\$');
                     $score += 40;
                 }
             }
 
             // ---- 21c. ADMIN_PASSWORD_HASH / ADMIN_PASSWORD_LEGACY (literal) ----
             if (stripos($content, 'ADMIN_PASSWORD_HASH') !== false) {
-                $detections[] = '[IOC] Konstanta ADMIN_PASSWORD_HASH ditemukan';
+                $detect('[IOC] Konstanta ADMIN_PASSWORD_HASH ditemukan', 'ADMIN_PASSWORD_HASH');
                 $score += 35;
             }
             if (stripos($content, 'ADMIN_PASSWORD_LEGACY') !== false) {
-                $detections[] = '[IOC] Konstanta ADMIN_PASSWORD_LEGACY ditemukan';
+                $detect('[IOC] Konstanta ADMIN_PASSWORD_LEGACY ditemukan', 'ADMIN_PASSWORD_LEGACY');
                 $score += 35;
             }
 
             // ---- 21d. fm_secure_session (literal) ----
             if (stripos($content, 'fm_secure_session') !== false) {
-                $detections[] = '[IOC] fm_secure_session — File Manager Auth Pattern';
+                $detect('[IOC] fm_secure_session — File Manager Auth Pattern', 'fm_secure_session');
                 $score += 35;
             }
 
@@ -908,30 +958,30 @@ class FileScannerController extends Controller
                 stripos($content, 'NU AING BRO') !== false
                 || stripos($content, 'NUAINGBRO') !== false
             ) {
-                $detections[] = '[IOC] NU AING BRO — Indonesian Backdoor Graffiti Tag';
+                $detect('[IOC] NU AING BRO — Indonesian Backdoor Graffiti Tag', 'NU\s*AING\s*BRO|NUAINGBRO');
                 $score += 50; // Ini tanda tangan spesifik, langsung +50
             }
 
             // ---- 21f. Jakub Vrana / Adminer (literal) ----
             if (stripos($content, 'Jakub Vrana') !== false) {
-                $detections[] = '[IOC] Jakub Vrana (Adminer Author Signature)';
+                $detect('[IOC] Jakub Vrana (Adminer Author Signature)', 'Jakub\s+Vrana');
                 $score += 30;
             }
             if (stripos($content, 'Adminer - Compact database management') !== false) {
-                $detections[] = '[IOC] Adminer — Compact Database Management Tool';
+                $detect('[IOC] Adminer — Compact Database Management Tool', 'Adminer');
                 $score += 30;
             }
 
             // ---- 21g. SECURE PHP FILE MANAGER / SMokWSO (literal) ----
             if (stripos($content, 'SECURE PHP FILE MANAGER') !== false) {
-                $detections[] = '[IOC] SECURE PHP FILE MANAGER — File Manager Shell';
+                $detect('[IOC] SECURE PHP FILE MANAGER — File Manager Shell', 'SECURE\s+PHP\s+FILE\s+MANAGER');
                 $score += 50;
             }
             if (
                 stripos($content, 'SMokWSO') !== false
                 || stripos($content, 'Smok WSO') !== false
             ) {
-                $detections[] = '[IOC] SMokWSO — WSO Shell Variant';
+                $detect('[IOC] SMokWSO — WSO Shell Variant', 'SMokWSO|Smok\s+WSO');
                 $score += 50;
             }
 
@@ -939,11 +989,11 @@ class FileScannerController extends Controller
             // File PHP yang mengandung referensi raw.githubusercontent atau GitHub repo
             // sering digunakan untuk mengunduh payload tambahan atau C2 staging
             if (stripos($content, 'raw.githubusercontent.com') !== false) {
-                $detections[] = '[IOC] GitHub Raw Content — kemungkinan unduh payload dari GitHub';
+                $detect('[IOC] GitHub Raw Content — kemungkinan unduh payload dari GitHub', 'raw\.githubusercontent\.com');
                 $score += 45;
             }
             if (preg_match('/github\.com\/[a-zA-Z0-9_\-]+\/[a-zA-Z0-9_\-]+/i', $content)) {
-                $detections[] = '[IOC] GitHub Repository Reference ditemukan di file PHP';
+                $detect('[IOC] GitHub Repository Reference ditemukan di file PHP', 'github\.com\/');
                 $score += 25;
             }
             if (
@@ -951,7 +1001,7 @@ class FileScannerController extends Controller
                 || stripos($content, 'github_token') !== false
                 || stripos($content, 'gh_token') !== false
             ) {
-                $detections[] = '[IOC] GitHub Token/Credential Hardcoded';
+                $detect('[IOC] GitHub Token/Credential Hardcoded', 'GITHUB_TOKEN|github_token|gh_token');
                 $score += 40;
             }
 
@@ -962,7 +1012,7 @@ class FileScannerController extends Controller
                 || strpos($content, 'yp_shell') !== false
                 || preg_match('/\[\s*YP\s*\]|\bYP\s+backdoor\b/i', $content)
             ) {
-                $detections[] = '[IOC] YP Tag — Attacker Signature Indonesia';
+                $detect('[IOC] YP Tag — Attacker Signature Indonesia', 'YP\s*Shell|ypshell|yp_shell');
                 $score += 50;
             }
 
@@ -972,14 +1022,14 @@ class FileScannerController extends Controller
                 || stripos($content, 'buleshell') !== false
                 || preg_match('/\bbule\s+shell\b|\bbule\s+backdoor\b/i', $content)
             ) {
-                $detections[] = '[IOC] Bule Tag — Indonesian Backdoor Marker';
+                $detect('[IOC] Bule Tag — Indonesian Backdoor Marker', 'bule.shell|buleshell');
                 $score += 50;
             }
 
             // ---- 21k. Hardcoded Token (literal) ----
             // Bot token Telegram: format numerik:string (contoh: 123456789:AAHxxx...)
             if (preg_match('/\d{8,10}:[A-Za-z0-9_\-]{35,}/s', $content)) {
-                $detections[] = '[IOC] Telegram Bot Token Hardcoded';
+                $detect('[IOC] Telegram Bot Token Hardcoded', '\d{8,10}:[A-Za-z0-9_\-]{35,}');
                 $score += 50;
             }
             // Bearer / API token hardcoded
@@ -989,12 +1039,12 @@ class FileScannerController extends Controller
                 || stripos($content, 'API_TOKEN') !== false
                 || stripos($content, 'api_token') !== false
             ) {
-                $detections[] = '[IOC] API/Bot Token Constant Hardcoded';
+                $detect('[IOC] API/Bot Token Constant Hardcoded', 'BOT_TOKEN|bot_token|API_TOKEN|api_token');
                 $score += 35;
             }
             // Bearer token in Authorization header
             if (preg_match('/Authorization[\'"\s:]+Bearer\s+[A-Za-z0-9_\-\.]{20,}/i', $content)) {
-                $detections[] = '[IOC] Hardcoded Bearer Token dalam Authorization header';
+                $detect('[IOC] Hardcoded Bearer Token dalam Authorization header', 'Authorization.*Bearer');
                 $score += 40;
             }
 
@@ -1079,19 +1129,49 @@ class FileScannerController extends Controller
     }
 
     /**
-     * Kelompokkan deteksi berdasarkan prefix kategori
+     * Kelompokkan deteksi berdasarkan prefix kategori.
+     * Mendukung format lama (string) dan format baru (array dengan 'label' & 'lines').
      */
     private function groupPatternsByCategory(array $patterns): array
     {
         $groups = [];
         foreach ($patterns as $pattern) {
-            if (preg_match('/^\[([^\]]+)\]/', $pattern, $m)) {
-                $groups[$m[1]][] = $pattern;
+            // Format baru: ['label' => '...', 'lines' => [...]]
+            if (is_array($pattern)) {
+                $label = $pattern['label'] ?? '';
+                if (preg_match('/^\[([^\]]+)\]/', $label, $m)) {
+                    $groups[$m[1]][] = $pattern;
+                } else {
+                    $groups['Other'][] = $pattern;
+                }
             } else {
-                $groups['Other'][] = $pattern;
+                // Format lama: string saja (backward compat)
+                if (preg_match('/^\[([^\]]+)\]/', $pattern, $m)) {
+                    $groups[$m[1]][] = ['label' => $pattern, 'lines' => []];
+                } else {
+                    $groups['Other'][] = ['label' => $pattern, 'lines' => []];
+                }
             }
         }
         return $groups;
+    }
+
+    /**
+     * Temukan nomor baris (1-based) yang cocok dengan pola regex di konten file.
+     * Mengembalikan maksimal 10 baris pertama yang cocok untuk menghindari noise.
+     */
+    private function findMatchingLines(array $lines, string $pattern): array
+    {
+        $matched = [];
+        foreach ($lines as $i => $line) {
+            if (@preg_match('/' . $pattern . '/i', $line)) {
+                $matched[] = $i + 1; // 1-based
+                if (count($matched) >= 10) {
+                    break;
+                }
+            }
+        }
+        return $matched;
     }
 
     /**
@@ -1342,11 +1422,14 @@ class FileScannerController extends Controller
                 if (str_starts_with($segLower, $prefix)) {
                     $phpExtensions = ['php', 'php3', 'php4', 'php5', 'php7', 'phtml', 'phar', 'phps'];
                     if (in_array($ext, $phpExtensions)) {
-                        $detections[] = sprintf(
-                            '[FolderCtx] File PHP ditemukan di folder CHAT (%s): %s — kemungkinan webshell yang diunggah via fitur chat',
-                            $segment,
-                            $fileName
-                        );
+                        $detections[] = [
+                            'label' => sprintf(
+                                '[FolderCtx] File PHP ditemukan di folder CHAT (%s): %s — kemungkinan webshell yang diunggah via fitur chat',
+                                $segment,
+                                $fileName
+                            ),
+                            'lines' => [],
+                        ];
                         $score += 60; // File PHP di folder chat sangat mencurigakan
                     }
                     // File tanpa ekstensi di folder chat yang mengandung PHP header
@@ -1364,36 +1447,48 @@ class FileScannerController extends Controller
                         $execExtensions = ['sh', 'bash', 'py', 'pl', 'rb', 'exe', 'bat', 'cmd', 'ps1'];
 
                         if (in_array($ext, $phpExtensions)) {
-                            $detections[] = sprintf(
-                                '[FolderCtx] File PHP ditemukan di folder FOTO (%s): %s — bukan file gambar, kemungkinan webshell',
-                                $segment,
-                                $fileName
-                            );
+                            $detections[] = [
+                                'label' => sprintf(
+                                    '[FolderCtx] File PHP ditemukan di folder FOTO (%s): %s — bukan file gambar, kemungkinan webshell',
+                                    $segment,
+                                    $fileName
+                                ),
+                                'lines' => [],
+                            ];
                             $score += 65; // PHP di folder foto = sangat mencurigakan
                         } elseif (in_array($ext, $execExtensions)) {
-                            $detections[] = sprintf(
-                                '[FolderCtx] File eksekusi (%s) ditemukan di folder FOTO (%s): %s',
-                                $ext,
-                                $segment,
-                                $fileName
-                            );
+                            $detections[] = [
+                                'label' => sprintf(
+                                    '[FolderCtx] File eksekusi (%s) ditemukan di folder FOTO (%s): %s',
+                                    $ext,
+                                    $segment,
+                                    $fileName
+                                ),
+                                'lines' => [],
+                            ];
                             $score += 55;
                         } elseif ($ext === '') {
                             // File tanpa ekstensi di folder foto
-                            $detections[] = sprintf(
-                                '[FolderCtx] File TANPA ekstensi di folder FOTO (%s): %s — tidak wajar untuk folder gambar',
-                                $segment,
-                                $fileName
-                            );
+                            $detections[] = [
+                                'label' => sprintf(
+                                    '[FolderCtx] File TANPA ekstensi di folder FOTO (%s): %s — tidak wajar untuk folder gambar',
+                                    $segment,
+                                    $fileName
+                                ),
+                                'lines' => [],
+                            ];
                             $score += 40;
                         } else {
                             // Ekstensi lain (txt, html, js, zip, dll) di folder foto
-                            $detections[] = sprintf(
-                                '[FolderCtx] File .%s ditemukan di folder FOTO (%s): %s — bukan file gambar',
-                                $ext,
-                                $segment,
-                                $fileName
-                            );
+                            $detections[] = [
+                                'label' => sprintf(
+                                    '[FolderCtx] File .%s ditemukan di folder FOTO (%s): %s — bukan file gambar',
+                                    $ext,
+                                    $segment,
+                                    $fileName
+                                ),
+                                'lines' => [],
+                            ];
                             $score += 20;
                         }
                     }

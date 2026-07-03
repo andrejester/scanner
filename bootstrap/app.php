@@ -23,7 +23,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\Role::class,
             'checkUserRole' => \App\Http\Middleware\CheckUserRoleLog::class,
             '2fa' => \App\Http\Middleware\TwoFactorMiddleware::class,
-            'throttle.alumni' => \App\Http\Middleware\ThrottleAlumniRegistration::class,
             'env' => \App\Http\Middleware\CheckDevelopmentEnvironment::class,
         ]);
 

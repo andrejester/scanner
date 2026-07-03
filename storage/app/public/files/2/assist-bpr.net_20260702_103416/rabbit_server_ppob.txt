@@ -1,2 +1,0 @@
- [*] Awaiting RPC requests. To exit press CTRL+C
- [*] Load component: /mnt/src/www/mvc/submodule/component/func.mod.php

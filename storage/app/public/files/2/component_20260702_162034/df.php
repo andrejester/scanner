@@ -1,1 +1,0 @@
-<?php defined( 'main' ) or die( 'Restricted access Testing ...' ) ?>

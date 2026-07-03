@@ -1,5 +1,0 @@
-/* Menonaktifkan semua animasi */
-* {
-  animation: none !important;
-  transition: none !important;
-}

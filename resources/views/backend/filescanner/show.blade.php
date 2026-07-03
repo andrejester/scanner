@@ -202,9 +202,28 @@
                                     <div class="accordion-body p-0">
                                         <ul class="list-group list-group-flush">
                                             @foreach ($items as $item)
+                                                @php
+                                                    $label = is_array($item) ? $item['label'] ?? $item : $item;
+                                                    $lines = is_array($item) ? $item['lines'] ?? [] : [];
+                                                @endphp
                                                 <li class="list-group-item">
-                                                    <i class="bx bx-bug text-{{ $gc }}"></i>
-                                                    {{ $item }}
+                                                    <div class="d-flex align-items-start flex-wrap gap-2">
+                                                        <i class="bx bx-bug text-{{ $gc }} mt-1"></i>
+                                                        <span class="flex-grow-1">{{ $label }}</span>
+                                                        @if (!empty($lines))
+                                                            <span class="ms-auto flex-shrink-0">
+                                                                @foreach ($lines as $lineNum)
+                                                                    <a href="javascript:void(0)"
+                                                                        class="badge bg-dark text-light text-decoration-none jump-line me-1"
+                                                                        data-line="{{ $lineNum }}"
+                                                                        title="Lompat ke baris {{ $lineNum }} di konten file">
+                                                                        <i class="bx bx-code-alt"></i> Baris
+                                                                        {{ $lineNum }}
+                                                                    </a>
+                                                                @endforeach
+                                                            </span>
+                                                        @endif
+                                                    </div>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -252,5 +271,74 @@
                 });
             });
         }
+
+        // ── Fitur lompat ke baris ────────────────────────────────────────────
+        // Saat halaman dimuat, bungkus setiap baris dalam <span> ber-id "line-N"
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeEl = document.querySelector('#fileContent code');
+            if (!codeEl) return;
+
+            const rawText = codeEl.textContent;
+            const lineArr = rawText.split('\n');
+
+            // Render ulang dengan setiap baris dibungkus <span id="line-N">
+            codeEl.innerHTML = lineArr.map(function(line, i) {
+                const lineNo = i + 1;
+                // Nomor baris rata kanan (min 4 digit), diikuti konten baris (html-escaped)
+                const num = String(lineNo).padStart(4, ' ');
+                const escaped = line
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                return '<span id="line-' + lineNo + '" class="code-line">' +
+                    '<span class="line-number text-muted select-none me-3" style="user-select:none;opacity:.45;font-size:.75em;">' +
+                    num + '</span>' +
+                    escaped +
+                    '</span>';
+            }).join('\n');
+
+            // Handler klik badge "Baris N"
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.jump-line');
+                if (!btn) return;
+
+                const lineNo = parseInt(btn.dataset.line, 10);
+                const target = document.getElementById('line-' + lineNo);
+                if (!target) return;
+
+                // Hapus highlight sebelumnya
+                document.querySelectorAll('.code-line.highlighted').forEach(function(el) {
+                    el.classList.remove('highlighted');
+                });
+
+                // Highlight baris target
+                target.classList.add('highlighted');
+
+                // Scroll konten file ke baris tersebut
+                const preEl = document.getElementById('fileContent');
+                preEl.scrollTop = target.offsetTop - preEl.offsetTop - 40;
+
+                // Juga scroll halaman ke area konten file jika perlu
+                preEl.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            });
+        });
     </script>
+
+    <style>
+        .code-line {
+            display: block;
+            line-height: 1.5;
+            padding: 0 4px;
+            border-radius: 2px;
+            transition: background .15s;
+        }
+
+        .code-line.highlighted {
+            background: rgba(255, 220, 0, 0.25);
+            outline: 1px solid rgba(255, 220, 0, 0.6);
+        }
+    </style>
 @endsection

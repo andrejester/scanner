@@ -128,10 +128,10 @@
                     <small class="text-muted">
                         Hanya menampilkan <span class="badge bg-danger">Critical</span>
                         <span class="badge bg-warning text-dark">High</span>
-                        <span class="badge bg-info">Medium</span>
-                        — level Low &amp; Safe disembunyikan
-                        @if ($low_threats + $safe_files > 0)
-                            <span class="text-muted ms-1">({{ $low_threats + $safe_files }} file tersembunyi)</span>
+                        — level Medium, Low &amp; Safe disembunyikan
+                        @if ($medium_threats + $low_threats + $safe_files > 0)
+                            <span class="text-muted ms-1">({{ $medium_threats + $low_threats + $safe_files }} file
+                                tersembunyi)</span>
                         @endif
                     </small>
                 </div>
@@ -211,9 +211,11 @@
                                     @foreach (['php', 'phtml', 'phar', 'js', 'html', 'htm', 'jpg', 'jpeg', 'png', 'gif', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'zip', 'rar'] as $ext)
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="scan_extensions[]"
-                                                value="{{ $ext }}" id="ext_{{ $ext }}">
-                                            <label class="form-check-label"
-                                                for="ext_{{ $ext }}">.{{ $ext }}</label>
+                                                value="{{ $ext }}" id="ext_{{ $ext }}"
+                                                {{ $ext == 'php' ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="ext_{{ $ext }}">
+                                                .{{ $ext }}
+                                            </label>
                                         </div>
                                     @endforeach
                                 </div>
